@@ -1,0 +1,11 @@
+plugins {
+    id 'idea'
+}
+
+idea {
+    module {
+        // Exclude the 'gradle' directory from being considered as a source directory
+        excludeDirs += file('build-logic')
+        excludeDirs += file('gradle')
+    }
+}
