@@ -4,13 +4,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="9619a9f2-4771-424d-8991-a01efc1d683f" name="Changes" comment="" />
+    <list default="true" id="9619a9f2-4771-424d-8991-a01efc1d683f" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="ChangesViewManager" flattened_view="true" show_ignored="false" />
   <component name="CreatePatchCommitExecutor">
     <option name="PATCH_PATH" value="" />
     <option name="REVERSE_PATCH" value="false" />
@@ -214,7 +215,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1704068171490</updated>
-      <workItem from="1704068172475" duration="1235000" />
+      <workItem from="1704068172475" duration="1306000" />
     </task>
     <servers />
   </component>
