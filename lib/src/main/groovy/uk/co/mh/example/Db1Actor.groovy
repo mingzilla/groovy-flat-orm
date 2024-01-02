@@ -6,7 +6,7 @@ import uk.co.mh.flatorm.util.ConnectionUtil
 import java.sql.Connection
 
 /**
- * Wrapper of {@link OrmActor} targetting a specific database with jndi connection.
+ * Wrapper of {@link OrmActor} targeting a specific database with jndi connection.
  *
  * @since 01/01/2024
  * @author ming.huang

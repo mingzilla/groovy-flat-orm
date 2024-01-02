@@ -5,25 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="9619a9f2-4771-424d-8991-a01efc1d683f" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/lib/src/main/groovy/uk/co/mh/example/Db1Actor.groovy" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/src/main/groovy/uk/co/mh/example/MyApp.groovy" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/src/main/groovy/uk/co/mh/example/MyPerson.groovy" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/src/main/groovy/uk/co/mh/flatorm/domain/OrmActor.groovy" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/src/main/groovy/uk/co/mh/flatorm/domain/OrmDomain.groovy" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/src/main/groovy/uk/co/mh/flatorm/domain/OrmRead.groovy" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/src/main/groovy/uk/co/mh/flatorm/util/ConnectionUtil.groovy" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/src/main/groovy/uk/co/mh/flatorm/util/DomainUtil.groovy" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/src/main/groovy/uk/co/mh/flatorm/util/Fn.groovy" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/src/test/groovy/uk/co/mh/example/MyPersonSpec.groovy" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/src/test/groovy/uk/co/mh/flatorm/domain/OrmMappingSpec.groovy" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/flat-orm.ipr" beforeDir="false" afterPath="$PROJECT_DIR$/flat-orm.ipr" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/flat-orm.iws" beforeDir="false" afterPath="$PROJECT_DIR$/flat-orm.iws" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/lib/build.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/flat-orm.lib.main.iml" beforeDir="false" afterPath="$PROJECT_DIR$/lib/flat-orm.lib.main.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/flat-orm.lib.test.iml" beforeDir="false" afterPath="$PROJECT_DIR$/lib/flat-orm.lib.test.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/src/main/groovy/uk/co/mh/flatorm/Library.groovy" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/src/test/groovy/uk/co/mh/flatorm/LibraryTest.groovy" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/src/main/groovy/uk/co/mh/example/Db1Actor.groovy" beforeDir="false" afterPath="$PROJECT_DIR$/lib/src/main/groovy/uk/co/mh/example/Db1Actor.groovy" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -309,7 +291,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1704068171490</updated>
-      <workItem from="1704068172475" duration="13163000" />
+      <workItem from="1704068172475" duration="13767000" />
     </task>
     <servers />
   </component>
