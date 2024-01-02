@@ -5,6 +5,7 @@ This project generates a jar file to be used to query or update database using S
 * ORM mapping
 * Read data: 1) return one item or null, 2) return a list
 * Write data: 1) direct, 2) transactional
+Always manually close connection at the end of a request.
 
 ### Background
 I'm exasperated about Hibernate. Especially when used in Grails projects.

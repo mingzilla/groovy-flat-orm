@@ -5,8 +5,25 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="9619a9f2-4771-424d-8991-a01efc1d683f" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/lib/src/main/groovy/uk/co/mh/example/Db1Actor.groovy" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/src/main/groovy/uk/co/mh/example/MyApp.groovy" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/src/main/groovy/uk/co/mh/example/MyPerson.groovy" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/src/main/groovy/uk/co/mh/flatorm/domain/OrmActor.groovy" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/src/main/groovy/uk/co/mh/flatorm/domain/OrmDomain.groovy" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/src/main/groovy/uk/co/mh/flatorm/domain/OrmRead.groovy" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/src/main/groovy/uk/co/mh/flatorm/util/ConnectionUtil.groovy" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/src/main/groovy/uk/co/mh/flatorm/util/DomainUtil.groovy" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/src/main/groovy/uk/co/mh/flatorm/util/Fn.groovy" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/src/test/groovy/uk/co/mh/example/MyPersonSpec.groovy" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/src/test/groovy/uk/co/mh/flatorm/domain/OrmMappingSpec.groovy" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/flat-orm.ipr" beforeDir="false" afterPath="$PROJECT_DIR$/flat-orm.ipr" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/flat-orm.iws" beforeDir="false" afterPath="$PROJECT_DIR$/flat-orm.iws" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/lib/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/flat-orm.lib.main.iml" beforeDir="false" afterPath="$PROJECT_DIR$/lib/flat-orm.lib.main.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/flat-orm.lib.test.iml" beforeDir="false" afterPath="$PROJECT_DIR$/lib/flat-orm.lib.test.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/src/main/groovy/uk/co/mh/flatorm/Library.groovy" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/src/test/groovy/uk/co/mh/flatorm/LibraryTest.groovy" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -73,6 +90,13 @@
       </state>
     </system>
   </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="JUnit5 Test Class" />
+      </list>
+    </option>
+  </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
@@ -99,21 +123,40 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/home/ming/dev/flat-orm/groovy-flat-orm/flat-orm.ipr&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary": "Spock",
+    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5": "",
+    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.Spock": "spock.lang.Specification",
+    "last_opened_file_path": "/home/ming/dev/flat-orm/groovy-flat-orm/lib/src/main/groovy/uk/co/mh/flatorm/domain",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
-  <component name="RunManager">
+}]]></component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/lib/src/main/groovy/uk/co/mh/flatorm/domain" />
+    </key>
+    <key name="CreateTestDialog.Recents.Supers">
+      <recent name="spock.lang.Specification" />
+      <recent name="" />
+    </key>
+    <key name="CreateTestDialog.RecentsKey">
+      <recent name="uk.co.mh.flatorm.domain" />
+      <recent name="uk.co.mh.example" />
+    </key>
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="uk.co.mh.flatorm.util" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Gradle.OrmMappingSpec">
     <configuration default="true" type="Applet" factoryName="Applet">
       <module name="" />
       <option name="MAIN_CLASS_NAME" />
@@ -165,6 +208,54 @@
       <RunAsTest>true</RunAsTest>
       <method v="2" />
     </configuration>
+    <configuration name="MyPersonSpec" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" value="" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value=":lib:test" />
+            <option value="--tests" />
+            <option value="&quot;uk.co.mh.example.MyPersonSpec&quot;" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <RunAsTest>true</RunAsTest>
+      <method v="2" />
+    </configuration>
+    <configuration name="OrmMappingSpec" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" value="" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value=":lib:test" />
+            <option value="--tests" />
+            <option value="&quot;uk.co.mh.flatorm.domain.OrmMappingSpec&quot;" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <RunAsTest>true</RunAsTest>
+      <method v="2" />
+    </configuration>
     <configuration default="true" type="JUnit" factoryName="JUnit">
       <option name="TEST_OBJECT" value="class" />
       <option name="VM_PARAMETERS" />
@@ -190,6 +281,8 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Gradle.OrmMappingSpec" />
+        <item itemvalue="Gradle.MyPersonSpec" />
         <item itemvalue="Gradle.LibraryTest" />
       </list>
     </recent_temporary>
@@ -216,7 +309,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1704068171490</updated>
-      <workItem from="1704068172475" duration="2979000" />
+      <workItem from="1704068172475" duration="13163000" />
     </task>
     <servers />
   </component>
