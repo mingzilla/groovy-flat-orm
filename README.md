@@ -15,6 +15,12 @@ I'm exasperated about Hibernate. Especially when used in Grails projects.
 * too many ways to handle transactions
 ORM is simple, so it's really not necessary to be too clever about it.
 
+### Usage
+Check the `example` package.
+* `MyApp` - an example of making a request
+* `Db1Actor` - provides a jndi connection to be used by a request 
+* `MyPerson` - a domain class with mapping defined, check unit tests for custom mapping
+
 ## Commands for this project
 * `./gradlew test`
 * `./gradlew build`

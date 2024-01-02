@@ -5,7 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="9619a9f2-4771-424d-8991-a01efc1d683f" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/lib/src/main/groovy/uk/co/mh/example/Db1Actor.groovy" beforeDir="false" afterPath="$PROJECT_DIR$/lib/src/main/groovy/uk/co/mh/example/Db1Actor.groovy" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -291,7 +291,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1704068171490</updated>
-      <workItem from="1704068172475" duration="13767000" />
+      <workItem from="1704068172475" duration="14372000" />
     </task>
     <servers />
   </component>
