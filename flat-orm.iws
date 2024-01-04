@@ -5,20 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="9619a9f2-4771-424d-8991-a01efc1d683f" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/flat-orm.ipr" beforeDir="false" afterPath="$PROJECT_DIR$/flat-orm.ipr" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/flat-orm.iws" beforeDir="false" afterPath="$PROJECT_DIR$/flat-orm.iws" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/src/main/groovy/uk/co/mh/example/Db1Actor.groovy" beforeDir="false" afterPath="$PROJECT_DIR$/lib/src/main/groovy/uk/co/mingzilla/example/Db1Actor.groovy" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/src/main/groovy/uk/co/mh/example/MyApp.groovy" beforeDir="false" afterPath="$PROJECT_DIR$/lib/src/main/groovy/uk/co/mingzilla/example/MyApp.groovy" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/src/main/groovy/uk/co/mh/example/MyPerson.groovy" beforeDir="false" afterPath="$PROJECT_DIR$/lib/src/main/groovy/uk/co/mingzilla/example/MyPerson.groovy" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/src/main/groovy/uk/co/mh/flatorm/domain/OrmActor.groovy" beforeDir="false" afterPath="$PROJECT_DIR$/lib/src/main/groovy/uk/co/mingzilla/flatorm/domain/OrmActor.groovy" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/src/main/groovy/uk/co/mh/flatorm/domain/OrmDomain.groovy" beforeDir="false" afterPath="$PROJECT_DIR$/lib/src/main/groovy/uk/co/mingzilla/flatorm/domain/OrmDomain.groovy" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/src/main/groovy/uk/co/mh/flatorm/domain/OrmMapping.groovy" beforeDir="false" afterPath="$PROJECT_DIR$/lib/src/main/groovy/uk/co/mingzilla/flatorm/domain/OrmMapping.groovy" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/src/main/groovy/uk/co/mh/flatorm/domain/OrmRead.groovy" beforeDir="false" afterPath="$PROJECT_DIR$/lib/src/main/groovy/uk/co/mingzilla/flatorm/domain/OrmRead.groovy" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/src/main/groovy/uk/co/mh/flatorm/util/ConnectionUtil.groovy" beforeDir="false" afterPath="$PROJECT_DIR$/lib/src/main/groovy/uk/co/mingzilla/flatorm/util/ConnectionUtil.groovy" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/src/main/groovy/uk/co/mh/flatorm/util/DomainUtil.groovy" beforeDir="false" afterPath="$PROJECT_DIR$/lib/src/main/groovy/uk/co/mingzilla/flatorm/util/DomainUtil.groovy" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/src/main/groovy/uk/co/mh/flatorm/util/Fn.groovy" beforeDir="false" afterPath="$PROJECT_DIR$/lib/src/main/groovy/uk/co/mingzilla/flatorm/util/Fn.groovy" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/src/test/groovy/uk/co/mh/example/MyPersonSpec.groovy" beforeDir="false" afterPath="$PROJECT_DIR$/lib/src/test/groovy/uk/co/mingzilla/example/MyPersonSpec.groovy" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/src/test/groovy/uk/co/mh/flatorm/domain/OrmMappingSpec.groovy" beforeDir="false" afterPath="$PROJECT_DIR$/lib/src/test/groovy/uk/co/mingzilla/flatorm/domain/OrmMappingSpec.groovy" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/src/main/groovy/uk/co/mingzilla/example/Db1Actor.groovy" beforeDir="false" afterPath="$PROJECT_DIR$/lib/src/main/groovy/uk/co/mingzilla/example/Db1Actor.groovy" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/src/main/groovy/uk/co/mingzilla/flatorm/domain/OrmActor.groovy" beforeDir="false" afterPath="$PROJECT_DIR$/lib/src/main/groovy/uk/co/mingzilla/flatorm/domain/OrmActor.groovy" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -306,14 +295,28 @@
       <updated>1704068171490</updated>
       <workItem from="1704068172475" duration="14851000" />
       <workItem from="1704298227609" duration="1242000" />
-      <workItem from="1704371346426" duration="80000" />
+      <workItem from="1704371346426" duration="861000" />
     </task>
+    <task id="LOCAL-00001" summary="Renamed package">
+      <option name="closed" value="true" />
+      <created>1704371483653</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1704371483653</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
   <component name="VcsManagerConfiguration">
+    <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
+    <option name="CHECK_NEW_TODO" value="false" />
+    <MESSAGE value="Renamed package" />
+    <option name="LAST_COMMIT_MESSAGE" value="Renamed package" />
     <option name="MAKE_NEW_CHANGELIST_ACTIVE" value="true" />
+    <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
   </component>
 </project>

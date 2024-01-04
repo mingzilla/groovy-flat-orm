@@ -14,7 +14,14 @@ import java.sql.Connection
 class Db1Actor {
 
     static void run(Closure fn) {
-        Connection connection = ConnectionUtil.getConnection('java:comp/env/jdbc/YourDataSource')
-        OrmActor.run(connection, fn)
+        OrmActor.run(createConnection(), fn)
+    }
+
+    static void runInTx(Closure fn) {
+        OrmActor.runInTx(createConnection(), fn)
+    }
+
+    private static Connection createConnection() {
+        return ConnectionUtil.getConnection('java:comp/env/jdbc/YourDataSource')
     }
 }

@@ -20,4 +20,19 @@ class OrmActor {
             ConnectionUtil.close(connection)
         }
     }
+
+    /**
+     * Run in a transaction.
+     */
+    static void runInTx(Connection connection, Closure fn) {
+        try {
+            connection.setAutoCommit(false)
+            fn(connection)
+            connection.commit()
+        } catch (Exception ignore) {
+            connection.rollback()
+        } finally {
+            ConnectionUtil.close(connection)
+        }
+    }
 }
