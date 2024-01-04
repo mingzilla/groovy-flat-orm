@@ -1,4 +1,4 @@
-package uk.co.mh.flatorm.domain
+package uk.co.mingzilla.flatorm.domain
 
 /**
  * @since 02/01/2024

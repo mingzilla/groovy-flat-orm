@@ -1,7 +1,7 @@
-package uk.co.mh.flatorm.domain
+package uk.co.mingzilla.flatorm.domain
 
 import spock.lang.Specification
-import uk.co.mh.example.MyPerson
+import uk.co.mingzilla.example.MyPerson
 
 /**
  * @since 02/01/2024

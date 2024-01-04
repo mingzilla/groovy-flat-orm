@@ -5,7 +5,20 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="9619a9f2-4771-424d-8991-a01efc1d683f" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/flat-orm.ipr" beforeDir="false" afterPath="$PROJECT_DIR$/flat-orm.ipr" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/flat-orm.iws" beforeDir="false" afterPath="$PROJECT_DIR$/flat-orm.iws" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/src/main/groovy/uk/co/mh/example/Db1Actor.groovy" beforeDir="false" afterPath="$PROJECT_DIR$/lib/src/main/groovy/uk/co/mingzilla/example/Db1Actor.groovy" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/src/main/groovy/uk/co/mh/example/MyApp.groovy" beforeDir="false" afterPath="$PROJECT_DIR$/lib/src/main/groovy/uk/co/mingzilla/example/MyApp.groovy" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/src/main/groovy/uk/co/mh/example/MyPerson.groovy" beforeDir="false" afterPath="$PROJECT_DIR$/lib/src/main/groovy/uk/co/mingzilla/example/MyPerson.groovy" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/src/main/groovy/uk/co/mh/flatorm/domain/OrmActor.groovy" beforeDir="false" afterPath="$PROJECT_DIR$/lib/src/main/groovy/uk/co/mingzilla/flatorm/domain/OrmActor.groovy" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/src/main/groovy/uk/co/mh/flatorm/domain/OrmDomain.groovy" beforeDir="false" afterPath="$PROJECT_DIR$/lib/src/main/groovy/uk/co/mingzilla/flatorm/domain/OrmDomain.groovy" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/src/main/groovy/uk/co/mh/flatorm/domain/OrmMapping.groovy" beforeDir="false" afterPath="$PROJECT_DIR$/lib/src/main/groovy/uk/co/mingzilla/flatorm/domain/OrmMapping.groovy" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/src/main/groovy/uk/co/mh/flatorm/domain/OrmRead.groovy" beforeDir="false" afterPath="$PROJECT_DIR$/lib/src/main/groovy/uk/co/mingzilla/flatorm/domain/OrmRead.groovy" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/src/main/groovy/uk/co/mh/flatorm/util/ConnectionUtil.groovy" beforeDir="false" afterPath="$PROJECT_DIR$/lib/src/main/groovy/uk/co/mingzilla/flatorm/util/ConnectionUtil.groovy" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/src/main/groovy/uk/co/mh/flatorm/util/DomainUtil.groovy" beforeDir="false" afterPath="$PROJECT_DIR$/lib/src/main/groovy/uk/co/mingzilla/flatorm/util/DomainUtil.groovy" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/src/main/groovy/uk/co/mh/flatorm/util/Fn.groovy" beforeDir="false" afterPath="$PROJECT_DIR$/lib/src/main/groovy/uk/co/mingzilla/flatorm/util/Fn.groovy" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/src/test/groovy/uk/co/mh/example/MyPersonSpec.groovy" beforeDir="false" afterPath="$PROJECT_DIR$/lib/src/test/groovy/uk/co/mingzilla/example/MyPersonSpec.groovy" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/src/test/groovy/uk/co/mh/flatorm/domain/OrmMappingSpec.groovy" beforeDir="false" afterPath="$PROJECT_DIR$/lib/src/test/groovy/uk/co/mingzilla/flatorm/domain/OrmMappingSpec.groovy" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -105,23 +118,23 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary": "Spock",
-    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5": "",
-    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.Spock": "spock.lang.Specification",
-    "last_opened_file_path": "/home/ming/dev/flat-orm/groovy-flat-orm/lib/src/main/groovy/uk/co/mh/flatorm/domain",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary&quot;: &quot;Spock&quot;,
+    &quot;com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5&quot;: &quot;&quot;,
+    &quot;com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.Spock&quot;: &quot;spock.lang.Specification&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/home/ming/dev/head/pi/pi.ipr&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/lib/src/main/groovy/uk/co/mh/flatorm/domain" />
@@ -291,7 +304,9 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1704068171490</updated>
-      <workItem from="1704068172475" duration="14372000" />
+      <workItem from="1704068172475" duration="14851000" />
+      <workItem from="1704298227609" duration="1242000" />
+      <workItem from="1704371346426" duration="80000" />
     </task>
     <servers />
   </component>

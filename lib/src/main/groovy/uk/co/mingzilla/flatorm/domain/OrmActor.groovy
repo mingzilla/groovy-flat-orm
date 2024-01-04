@@ -1,6 +1,6 @@
-package uk.co.mh.flatorm.domain
+package uk.co.mingzilla.flatorm.domain
 
-import uk.co.mh.flatorm.util.ConnectionUtil
+import uk.co.mingzilla.flatorm.util.ConnectionUtil
 
 import java.sql.Connection
 

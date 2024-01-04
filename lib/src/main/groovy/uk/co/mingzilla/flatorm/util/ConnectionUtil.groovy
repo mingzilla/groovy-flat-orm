@@ -1,4 +1,4 @@
-package uk.co.mh.flatorm.util
+package uk.co.mingzilla.flatorm.util
 
 import javax.naming.InitialContext
 import javax.naming.NamingException

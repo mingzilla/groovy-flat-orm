@@ -1,4 +1,4 @@
-package uk.co.mh.flatorm.util
+package uk.co.mingzilla.flatorm.util
 
 import groovy.json.JsonOutput
 import org.apache.commons.lang3.StringUtils

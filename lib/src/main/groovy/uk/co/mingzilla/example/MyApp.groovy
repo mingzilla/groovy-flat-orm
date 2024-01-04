@@ -1,6 +1,6 @@
-package uk.co.mh.example
+package uk.co.mingzilla.example
 
-import uk.co.mh.flatorm.domain.OrmRead
+import uk.co.mingzilla.flatorm.domain.OrmRead
 
 import java.sql.Connection
 

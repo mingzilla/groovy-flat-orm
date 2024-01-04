@@ -1,7 +1,7 @@
-package uk.co.mh.example
+package uk.co.mingzilla.example
 
-import uk.co.mh.flatorm.domain.OrmActor
-import uk.co.mh.flatorm.util.ConnectionUtil
+import uk.co.mingzilla.flatorm.domain.OrmActor
+import uk.co.mingzilla.flatorm.util.ConnectionUtil
 
 import java.sql.Connection
 

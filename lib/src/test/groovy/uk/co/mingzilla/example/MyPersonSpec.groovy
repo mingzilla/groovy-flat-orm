@@ -1,4 +1,4 @@
-package uk.co.mh.example
+package uk.co.mingzilla.example
 
 import spock.lang.Specification
 

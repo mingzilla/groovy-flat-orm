@@ -1,4 +1,4 @@
-package uk.co.mh.flatorm.util
+package uk.co.mingzilla.flatorm.util
 
 /**
  * @since 01/01/2024

@@ -1,6 +1,6 @@
-package uk.co.mh.flatorm.domain
+package uk.co.mingzilla.flatorm.domain
 
-import uk.co.mh.flatorm.util.Fn
+import uk.co.mingzilla.flatorm.util.Fn
 
 import java.sql.ResultSet
 
