@@ -1,9 +1,12 @@
 package uk.co.mingzilla.example
 
-
 import uk.co.mingzilla.flatorm.domain.OrmDomain
 import uk.co.mingzilla.flatorm.domain.OrmMapping
 import uk.co.mingzilla.flatorm.domain.OrmRead
+import uk.co.mingzilla.flatorm.domain.OrmValidate
+import uk.co.mingzilla.flatorm.domain.validation.DomainAndErrors
+import uk.co.mingzilla.flatorm.domain.validation.DomainErrors
+import uk.co.mingzilla.flatorm.util.Fn
 
 import java.sql.Connection
 
@@ -39,6 +42,17 @@ class MyPerson implements OrmDomain {
                 OrmMapping.create('id', 'SERIAL'),
                 OrmMapping.create('name', 'usercode'),
         ])
+    }
+
+    DomainErrors validate() {
+        DomainAndErrors domainAndErrors = DomainAndErrors.create(this)
+
+        domainAndErrors = Fn.pipe(
+                OrmValidate.required(['id', 'name']),
+                OrmValidate.whenSatisfies({ id == 1 }).required(['name']),
+        )(domainAndErrors) as DomainAndErrors
+
+        return domainAndErrors.domainErrors;
     }
 
     @Override

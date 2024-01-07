@@ -10,19 +10,8 @@ import uk.co.mingzilla.flatorm.util.Fn
  */
 class OrmValidate {
 
-    static Closure<DomainAndErrors> validate(String errorType, List<String> fields, Closure<Boolean> ifTrueThenFailValidationFn) {
-        return { DomainAndErrors domainAndErrors ->
-            Map<String, Object> fieldAndValue = fields.collectEntries {
-                Object fieldValue = domainAndErrors.domain[(it)]
-                return [(it): fieldValue]
-            }
-            Map<String, Object> invalidFieldAndValue = fieldAndValue.findAll { ifTrueThenFailValidationFn(it.value) }
-            return domainAndErrors.mergeErrors(errorType, invalidFieldAndValue)
-        }
-    }
-
     static Closure<DomainAndErrors> required(List<String> fields) {
-        return validate('required', fields, { StringUtils.isBlank(it) })
+        return validate('required', fields, { StringUtils.isBlank(String.valueOf(it)) })
     }
 
     static Closure<DomainAndErrors> minLength(List<String> fields, Long min) {
@@ -54,5 +43,70 @@ class OrmValidate {
             List items = domainsGroupByLowerCaseKey.get(key) ?: []
             return items.length > 1
         })
+    }
+
+    static Closure<DomainAndErrors> validate(String errorType, List<String> fields, Closure<Boolean> ifTrueThenFailValidationFn) {
+        return { DomainAndErrors domainAndErrors ->
+            Map<String, Object> fieldAndValue = fields.collectEntries {
+                Object fieldValue = domainAndErrors.domain[(it)]
+                return [(it): fieldValue]
+            }
+            Map<String, Object> invalidFieldAndValue = fieldAndValue.findAll { ifTrueThenFailValidationFn(it.value) }
+            return domainAndErrors.mergeErrors(errorType, invalidFieldAndValue)
+        }
+    }
+
+    static Map<String, Closure<Closure<DomainAndErrors>>> whenSatisfies(Closure<Boolean> conditionFn) {
+        return [
+                required : { List<String> fields ->
+                    return { DomainAndErrors domainAndErrors ->
+                        return conditionFn(domainAndErrors.domain) ?
+                                required(fields)(domainAndErrors) :
+                                domainAndErrors
+                    }
+                },
+                minLength: { List<String> fields, Long min ->
+                    return { DomainAndErrors domainAndErrors ->
+                        return conditionFn(domainAndErrors.domain) ?
+                                minLength(fields, min)(domainAndErrors) :
+                                domainAndErrors
+                    }
+                },
+                minValue : { List<String> fields, Long min ->
+                    return { DomainAndErrors domainAndErrors ->
+                        return conditionFn(domainAndErrors.domain) ?
+                                minValue(fields, min)(domainAndErrors) :
+                                domainAndErrors
+                    }
+                },
+                maxValue : { List<String> fields, Long max ->
+                    return { DomainAndErrors domainAndErrors ->
+                        return conditionFn(domainAndErrors.domain) ?
+                                maxValue(fields, max)(domainAndErrors) :
+                                domainAndErrors
+                    }
+                },
+                inList   : { List<String> fields, List values ->
+                    return { DomainAndErrors domainAndErrors ->
+                        return conditionFn(domainAndErrors.domain) ?
+                                inList(fields, values)(domainAndErrors) :
+                                domainAndErrors
+                    }
+                },
+                notInList: { List<String> fields, List values ->
+                    return { DomainAndErrors domainAndErrors ->
+                        return conditionFn(domainAndErrors.domain) ?
+                                notInList(fields, values)(domainAndErrors) :
+                                domainAndErrors
+                    }
+                },
+                unique   : { List<String> fields, Map<String, List> domainsGroupByLowerCaseKey ->
+                    return { DomainAndErrors domainAndErrors ->
+                        return conditionFn(domainAndErrors.domain) ?
+                                unique(fields, domainsGroupByLowerCaseKey)(domainAndErrors) :
+                                domainAndErrors
+                    }
+                },
+        ]
     }
 }

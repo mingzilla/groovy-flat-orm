@@ -507,4 +507,14 @@ class Fn {
             // ignore error
         }
     }
+
+    static <T> Closure<T> pipe(Closure... fns) {
+        return { def value ->
+            def result = value
+            fns.each { fn ->
+                result = fn(result)
+            }
+            return result
+        }
+    }
 }
