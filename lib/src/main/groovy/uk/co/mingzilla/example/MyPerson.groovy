@@ -19,8 +19,8 @@ class MyPerson implements OrmDomain {
     static List<MyPerson> listWithPrefix(Connection connection, String prefix) {
         String sql = """
         SELECT * 
-        FROM MY_PERSON
-        WHERE name like '${prefix}%'
+        FROM MIS_USERS
+        WHERE USERCODE like '${prefix}%'
         """
         return OrmRead.list(connection, sql, MyPerson.class)
     }
@@ -35,11 +35,14 @@ class MyPerson implements OrmDomain {
 
     @Override
     List<OrmMapping> resolveMappings() {
-        return OrmMapping.mapDomain(MyPerson.class, [])
+        return OrmMapping.mapDomain(MyPerson.class, [
+                OrmMapping.create('id', 'SERIAL'),
+                OrmMapping.create('name', 'usercode'),
+        ])
     }
 
     @Override
     String resolveTableName() {
-        return 'MY_PERSON'
+        return 'MIS_USERS'
     }
 }

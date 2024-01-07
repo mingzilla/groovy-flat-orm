@@ -12,6 +12,7 @@
     <orderEntry type="module" module-name="flat-orm.lib.main" />
     <orderEntry type="library" name="Gradle: org.apache.commons:commons-lang3:3.12.0" level="project" />
     <orderEntry type="library" name="Gradle: org.spockframework:spock-core:2.2-groovy-3.0" level="project" />
+    <orderEntry type="library" name="Gradle: org.mariadb.jdbc:mariadb-java-client:2.7.2" level="project" />
     <orderEntry type="library" name="Gradle: org.codehaus.groovy:groovy-ant:3.0.9" level="project" />
     <orderEntry type="library" name="Gradle: org.codehaus.groovy:groovy-astbuilder:3.0.9" level="project" />
     <orderEntry type="library" name="Gradle: org.codehaus.groovy:groovy-cli-picocli:3.0.9" level="project" />

@@ -14,6 +14,7 @@ import java.sql.Connection
 class OrmActor {
 
     static void run(Connection connection, Closure fn) {
+        if (!connection) return
         try {
             fn(connection)
         } finally {
@@ -25,6 +26,7 @@ class OrmActor {
      * Run in a transaction.
      */
     static void runInTx(Connection connection, Closure fn) {
+        if (!connection) return
         try {
             connection.setAutoCommit(false)
             fn(connection)

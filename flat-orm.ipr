@@ -702,6 +702,16 @@
         <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.junit.platform/junit-platform-launcher/1.9.0/d5679a91eba86a856998e08b1f8bad0f1be1d722/junit-platform-launcher-1.9.0-sources.jar!/" />
       </SOURCES>
     </library>
+    <library name="Gradle: org.mariadb.jdbc:mariadb-java-client:2.7.2" type="java-imported" external-system-id="GRADLE">
+      <properties groupId="org.mariadb.jdbc" artifactId="mariadb-java-client" version="2.7.2" />
+      <CLASSES>
+        <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.mariadb.jdbc/mariadb-java-client/2.7.2/138fb9b8caee700bf4793bc42947113a1dbc8532/mariadb-java-client-2.7.2.jar!/" />
+      </CLASSES>
+      <JAVADOC />
+      <SOURCES>
+        <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.mariadb.jdbc/mariadb-java-client/2.7.2/c7cc82b15851b78616e4f97c49abd1459b3f3810/mariadb-java-client-2.7.2-sources.jar!/" />
+      </SOURCES>
+    </library>
     <library name="Gradle: org.opentest4j:opentest4j:1.2.0" type="java-imported" external-system-id="GRADLE">
       <properties groupId="org.opentest4j" artifactId="opentest4j" version="1.2.0" />
       <CLASSES>

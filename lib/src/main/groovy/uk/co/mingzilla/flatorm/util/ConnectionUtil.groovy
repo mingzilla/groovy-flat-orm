@@ -1,10 +1,7 @@
 package uk.co.mingzilla.flatorm.util
 
-import javax.naming.InitialContext
-import javax.naming.NamingException
-import javax.sql.DataSource
 import java.sql.Connection
-import java.sql.SQLException
+import java.sql.Driver
 
 /**
  * @since 01/01/2024
@@ -12,13 +9,11 @@ import java.sql.SQLException
  */
 class ConnectionUtil {
 
-    static Connection getConnection(String jndi) {
+    static Connection getConnection(String driverClassName, String url, Properties connectionProperties) {
         try {
-            DataSource dataSource = new InitialContext().lookup(jndi) as DataSource
-            return dataSource.connection
-        } catch (SQLException | NamingException e) {
-            e.printStackTrace()
-            throw e
+            return ((Driver) Class.forName(driverClassName).newInstance()).connect(url, connectionProperties)
+        } catch (Exception ex) {
+            throw new RuntimeException(ex.message, ex)
         }
     }
 

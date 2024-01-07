@@ -5,9 +5,17 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="9619a9f2-4771-424d-8991-a01efc1d683f" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/lib/src/test/groovy/uk/co/mingzilla/example/Db1ActorSpec.groovy" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/src/test/groovy/uk/co/mingzilla/flatorm/util/FnSpec.groovy" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/flat-orm.ipr" beforeDir="false" afterPath="$PROJECT_DIR$/flat-orm.ipr" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/flat-orm.iws" beforeDir="false" afterPath="$PROJECT_DIR$/flat-orm.iws" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/lib/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/flat-orm.lib.test.iml" beforeDir="false" afterPath="$PROJECT_DIR$/lib/flat-orm.lib.test.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/src/main/groovy/uk/co/mingzilla/example/Db1Actor.groovy" beforeDir="false" afterPath="$PROJECT_DIR$/lib/src/main/groovy/uk/co/mingzilla/example/Db1Actor.groovy" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/src/main/groovy/uk/co/mingzilla/example/MyPerson.groovy" beforeDir="false" afterPath="$PROJECT_DIR$/lib/src/main/groovy/uk/co/mingzilla/example/MyPerson.groovy" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/src/main/groovy/uk/co/mingzilla/flatorm/domain/OrmActor.groovy" beforeDir="false" afterPath="$PROJECT_DIR$/lib/src/main/groovy/uk/co/mingzilla/flatorm/domain/OrmActor.groovy" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/src/main/groovy/uk/co/mingzilla/flatorm/util/ConnectionUtil.groovy" beforeDir="false" afterPath="$PROJECT_DIR$/lib/src/main/groovy/uk/co/mingzilla/flatorm/util/ConnectionUtil.groovy" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/src/main/groovy/uk/co/mingzilla/flatorm/util/Fn.groovy" beforeDir="false" afterPath="$PROJECT_DIR$/lib/src/main/groovy/uk/co/mingzilla/flatorm/util/Fn.groovy" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -133,6 +141,8 @@
       <recent name="" />
     </key>
     <key name="CreateTestDialog.RecentsKey">
+      <recent name="uk.co.mingzilla.flatorm.util" />
+      <recent name="uk.co.mingzilla.example" />
       <recent name="uk.co.mh.flatorm.domain" />
       <recent name="uk.co.mh.example" />
     </key>
@@ -140,7 +150,7 @@
       <recent name="uk.co.mh.flatorm.util" />
     </key>
   </component>
-  <component name="RunManager" selected="Gradle.OrmMappingSpec">
+  <component name="RunManager" selected="Gradle.Db1ActorSpec">
     <configuration default="true" type="Applet" factoryName="Applet">
       <module name="" />
       <option name="MAIN_CLASS_NAME" />
@@ -168,7 +178,7 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="LibraryTest" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+    <configuration name="Db1ActorSpec" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
@@ -181,7 +191,7 @@
           <list>
             <option value=":lib:test" />
             <option value="--tests" />
-            <option value="&quot;uk.co.mh.flatorm.LibraryTest&quot;" />
+            <option value="&quot;uk.co.mingzilla.example.Db1ActorSpec&quot;" />
           </list>
         </option>
         <option name="vmOptions" />
@@ -192,7 +202,7 @@
       <RunAsTest>true</RunAsTest>
       <method v="2" />
     </configuration>
-    <configuration name="MyPersonSpec" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+    <configuration name="Db1ActorSpec.Test run" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
@@ -205,7 +215,55 @@
           <list>
             <option value=":lib:test" />
             <option value="--tests" />
-            <option value="&quot;uk.co.mh.example.MyPersonSpec&quot;" />
+            <option value="&quot;uk.co.mingzilla.example.Db1ActorSpec.Test run&quot;" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <RunAsTest>true</RunAsTest>
+      <method v="2" />
+    </configuration>
+    <configuration name="FnSpec" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" value="" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value=":lib:test" />
+            <option value="--tests" />
+            <option value="&quot;uk.co.mingzilla.flatorm.util.FnSpec&quot;" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <RunAsTest>true</RunAsTest>
+      <method v="2" />
+    </configuration>
+    <configuration name="FnSpec.isNumber" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" value="" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value=":lib:test" />
+            <option value="--tests" />
+            <option value="&quot;uk.co.mingzilla.flatorm.util.FnSpec.isNumber&quot;" />
           </list>
         </option>
         <option name="vmOptions" />
@@ -265,9 +323,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Gradle.Db1ActorSpec" />
+        <item itemvalue="Gradle.Db1ActorSpec.Test run" />
+        <item itemvalue="Gradle.FnSpec" />
+        <item itemvalue="Gradle.FnSpec.isNumber" />
         <item itemvalue="Gradle.OrmMappingSpec" />
-        <item itemvalue="Gradle.MyPersonSpec" />
-        <item itemvalue="Gradle.LibraryTest" />
       </list>
     </recent_temporary>
   </component>
@@ -295,7 +355,8 @@
       <updated>1704068171490</updated>
       <workItem from="1704068172475" duration="14851000" />
       <workItem from="1704298227609" duration="1242000" />
-      <workItem from="1704371346426" duration="861000" />
+      <workItem from="1704371346426" duration="905000" />
+      <workItem from="1704632756839" duration="7471000" />
     </task>
     <task id="LOCAL-00001" summary="Renamed package">
       <option name="closed" value="true" />
@@ -305,7 +366,15 @@
       <option name="project" value="LOCAL" />
       <updated>1704371483653</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="Updated to handle transactional execution">
+      <option name="closed" value="true" />
+      <created>1704372230424</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1704372230424</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -315,7 +384,8 @@
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_NEW_TODO" value="false" />
     <MESSAGE value="Renamed package" />
-    <option name="LAST_COMMIT_MESSAGE" value="Renamed package" />
+    <MESSAGE value="Updated to handle transactional execution" />
+    <option name="LAST_COMMIT_MESSAGE" value="Updated to handle transactional execution" />
     <option name="MAKE_NEW_CHANGELIST_ACTIVE" value="true" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
   </component>

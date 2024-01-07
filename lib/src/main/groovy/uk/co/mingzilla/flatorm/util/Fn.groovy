@@ -29,7 +29,7 @@ class Fn {
 
     static final Set<Class<?>> NON_CUSTOM_OBJECT_TYPES = PRIMITIVE_TYPES + Date.class
 
-    static boolean isNumber = { def value ->
+    static boolean isNumber(Object value) {
         value != null && "${value}".isNumber()
     }
 
@@ -337,6 +337,7 @@ class Fn {
     static def setPrimitiveField = { Object obj, String k, def v ->
         Class type = obj.metaClass.getMetaProperty(k).type
         boolean isNull = Fn.isNull(v) // could be org.codehaus.groovy.grails.web.json.JSONObject$Null
+        boolean isNumber = Fn.isNumber(v)
 
         try {
             switch (type?.name) {
@@ -354,19 +355,21 @@ class Fn {
             }
             switch (type) {
                 case Integer:
-                    if (isNull || Fn.isNumber(v)) obj[(k)] = isNull ? null : Integer.valueOf(String.valueOf(v))
+                    if (isNull || isNumber) {
+                        obj[(k)] = isNull ? null : Integer.valueOf(String.valueOf(v))
+                    }
                     break
                 case Long:
-                    if (isNull || Fn.isNumber(v)) obj[(k)] = isNull ? null : Long.valueOf(String.valueOf(v))
+                    if (isNull || isNumber) obj[(k)] = isNull ? null : Long.valueOf(String.valueOf(v))
                     break
                 case BigDecimal:
-                    if (isNull || Fn.isNumber(v)) obj[(k)] = isNull ? null : BigDecimal.valueOf(String.valueOf(v))
+                    if (isNull || isNumber) obj[(k)] = isNull ? null : BigDecimal.valueOf(String.valueOf(v))
                     break
                 case Double:
-                    if (isNull || Fn.isNumber(v)) obj[(k)] = isNull ? null : Double.valueOf(String.valueOf(v))
+                    if (isNull || isNumber) obj[(k)] = isNull ? null : Double.valueOf(String.valueOf(v))
                     break
                 case Float:
-                    if (isNull || Fn.isNumber(v)) obj[(k)] = isNull ? null : Float.valueOf(String.valueOf(v))
+                    if (isNull || isNumber) obj[(k)] = isNull ? null : Float.valueOf(String.valueOf(v))
                     break
                 case Boolean:
                     if (isNull || Fn.isBoolean(v)) obj[(k)] = isNull ? null : Boolean.valueOf(String.valueOf(v))
