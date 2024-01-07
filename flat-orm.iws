@@ -5,10 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="9619a9f2-4771-424d-8991-a01efc1d683f" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/flat-orm.iws" beforeDir="false" afterPath="$PROJECT_DIR$/flat-orm.iws" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/src/main/groovy/uk/co/mingzilla/example/MyPerson.groovy" beforeDir="false" afterPath="$PROJECT_DIR$/lib/src/main/groovy/uk/co/mingzilla/example/MyPerson.groovy" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/src/main/groovy/uk/co/mingzilla/flatorm/domain/OrmValidate.groovy" beforeDir="false" afterPath="$PROJECT_DIR$/lib/src/main/groovy/uk/co/mingzilla/flatorm/domain/OrmValidate.groovy" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/src/main/groovy/uk/co/mingzilla/flatorm/util/Fn.groovy" beforeDir="false" afterPath="$PROJECT_DIR$/lib/src/main/groovy/uk/co/mingzilla/flatorm/util/Fn.groovy" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -353,7 +350,7 @@
       <workItem from="1704068172475" duration="14851000" />
       <workItem from="1704298227609" duration="1242000" />
       <workItem from="1704371346426" duration="905000" />
-      <workItem from="1704632756839" duration="14613000" />
+      <workItem from="1704632756839" duration="14640000" />
     </task>
     <task id="LOCAL-00001" summary="Renamed package">
       <option name="closed" value="true" />
@@ -387,7 +384,15 @@
       <option name="project" value="LOCAL" />
       <updated>1704655278043</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="Added temp changes">
+      <option name="closed" value="true" />
+      <created>1704658157481</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1704658157481</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -400,7 +405,8 @@
     <MESSAGE value="Updated to handle transactional execution" />
     <MESSAGE value="Updated to test connection" />
     <MESSAGE value="Added OrmValidate" />
-    <option name="LAST_COMMIT_MESSAGE" value="Added OrmValidate" />
+    <MESSAGE value="Added temp changes" />
+    <option name="LAST_COMMIT_MESSAGE" value="Added temp changes" />
     <option name="MAKE_NEW_CHANGELIST_ACTIVE" value="true" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
   </component>

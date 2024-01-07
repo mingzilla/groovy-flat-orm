@@ -44,6 +44,7 @@ class MyPerson implements OrmDomain {
         ])
     }
 
+    // todo - to finish
     DomainErrors validate() {
         DomainAndErrors domainAndErrors = DomainAndErrors.create(this)
 
