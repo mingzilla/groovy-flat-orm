@@ -30,7 +30,7 @@ class OrmRead {
                 })
     }
 
-    static <T> List<T> list(Connection connection, String selectStatement, Class aClass) {
+    static <T> List<T> list(Connection connection, Class aClass, String selectStatement) {
         List<OrmMapping> mappings = (aClass.newInstance() as OrmDomain).resolveMappings()
 
         return listAndMerge(connection, mappings, selectStatement,
@@ -83,7 +83,7 @@ class OrmRead {
     /**
      * When used, the select statement typically needs a WHERE clause.
      */
-    static <T> T getFirst(Connection connection, String selectStatement, Class aClass) {
+    static <T> T getFirst(Connection connection, Class aClass, String selectStatement) {
         List<OrmMapping> mappings = (aClass.newInstance() as OrmDomain).resolveMappings()
 
         return getAndMerge(connection, mappings, selectStatement,

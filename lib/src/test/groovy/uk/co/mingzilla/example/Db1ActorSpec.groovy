@@ -18,17 +18,20 @@ class Db1ActorSpec extends Specification {
         List<MyPerson> people1 = []
         List<MyPerson> people2 = []
         MyPerson person
+        long count = 0
 
         Db1Actor.run { Connection connection ->
             people1 = OrmRead.listAll(connection, MyPerson.class)
             people2 = MyPerson.listStartWith(connection, 'ADM')
             person = MyPerson.getById(connection, 1)
+            count = OrmRead.count(connection, MyPerson.class)
         }
 
         expect:
         people1.size() > 0
         people2.size() > 0
         person != null
+        count > 0
     }
 
     void "Test runInTx"() {

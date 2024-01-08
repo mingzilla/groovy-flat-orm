@@ -24,15 +24,11 @@ class MyPerson implements OrmDomain {
         FROM MIS_USERS
         WHERE USERCODE like '${prefix}%'
         """
-        return OrmRead.list(connection, sql, MyPerson.class)
+        return OrmRead.list(connection, MyPerson.class, sql)
     }
 
     static MyPerson getById(Connection connection, Integer id) {
         return OrmRead.getById(connection, MyPerson.class, id)
-    }
-
-    static Long count(Connection connection) {
-        return OrmRead.count(connection, MyPerson.class)
     }
 
     @Override
