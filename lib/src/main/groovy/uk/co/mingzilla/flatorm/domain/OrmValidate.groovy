@@ -55,7 +55,7 @@ class OrmValidate {
         return domainAndErrors.mergeErrors(errorType, invalidFieldAndValue)
     }
 
-    static OrmConditionalValidate whenSatisfies(Closure<Boolean> conditionFn) {
+    static OrmConditionalValidate ifSatisfies(Closure<Boolean> conditionFn) {
         return new OrmConditionalValidate(conditionFn: conditionFn)
     }
 }

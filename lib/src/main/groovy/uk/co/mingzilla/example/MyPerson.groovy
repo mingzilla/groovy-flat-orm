@@ -47,7 +47,7 @@ class MyPerson implements OrmDomain {
     DomainErrors validate() {
         DomainAndErrors item = DomainAndErrors.create(this)
         OrmValidate.required(item, ['id', 'name'])
-        OrmValidate.whenSatisfies({ id == 1 }).minLength(item, ['name'], 5)
+        OrmValidate.ifSatisfies({ id == 1 }).minLength(item, ['name'], 5)
         return item.domainErrors;
     }
 
