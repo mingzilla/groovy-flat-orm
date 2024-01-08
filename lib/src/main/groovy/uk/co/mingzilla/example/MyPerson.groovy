@@ -6,7 +6,6 @@ import uk.co.mingzilla.flatorm.domain.OrmRead
 import uk.co.mingzilla.flatorm.domain.OrmValidate
 import uk.co.mingzilla.flatorm.domain.validation.DomainAndErrors
 import uk.co.mingzilla.flatorm.domain.validation.DomainErrors
-import uk.co.mingzilla.flatorm.util.Fn
 
 import java.sql.Connection
 
@@ -47,12 +46,8 @@ class MyPerson implements OrmDomain {
     // todo - to finish
     DomainErrors validate() {
         DomainAndErrors domainAndErrors = DomainAndErrors.create(this)
-
-        domainAndErrors = Fn.pipe(
-                OrmValidate.required(['id', 'name']),
-                OrmValidate.whenSatisfies({ id == 1 }).required(['name']),
-        )(domainAndErrors) as DomainAndErrors
-
+        OrmValidate.required(domainAndErrors, ['id', 'name'])
+        OrmValidate.whenSatisfies(domainAndErrors, { id == 1 }).required(['name'])
         return domainAndErrors.domainErrors;
     }
 
