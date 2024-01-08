@@ -19,7 +19,7 @@ class MyPersonSpec extends Specification {
         MyPerson person = new MyPerson(id: 1, name: 'Andy')
 
         when:
-        DomainErrors domainErrors = person.validate()
+        DomainErrors domainErrors = person.validate().domainErrors
 
         then:
         assert domainErrors.hasErrors()
