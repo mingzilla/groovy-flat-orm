@@ -10,34 +10,34 @@ import uk.co.mingzilla.flatorm.util.Fn
  */
 class OrmValidate {
 
-    static Closure<DomainAndErrors> required(DomainAndErrors domainAndErrors, List<String> fields) {
+    static DomainAndErrors required(DomainAndErrors domainAndErrors, List<String> fields) {
         return validate(domainAndErrors, 'required', fields, { StringUtils.isBlank(String.valueOf(it)) })
     }
 
-    static Closure<DomainAndErrors> minLength(DomainAndErrors domainAndErrors, List<String> fields, Long min) {
+    static DomainAndErrors minLength(DomainAndErrors domainAndErrors, List<String> fields, Long min) {
         return validate(domainAndErrors, 'minLength', fields, { String.valueOf(it ?: '').size() >= min })
     }
 
-    static Closure<DomainAndErrors> minValue(DomainAndErrors domainAndErrors, List<String> fields, Long min) {
+    static DomainAndErrors minValue(DomainAndErrors domainAndErrors, List<String> fields, Long min) {
         return validate(domainAndErrors, 'minValue', fields, { Fn.isNumber(it) && Fn.asNumber(it) >= min })
     }
 
-    static Closure<DomainAndErrors> maxValue(DomainAndErrors domainAndErrors, List<String> fields, Long max) {
+    static DomainAndErrors maxValue(DomainAndErrors domainAndErrors, List<String> fields, Long max) {
         return validate(domainAndErrors, 'maxValue', fields, { Fn.isNumber(it) && Fn.asNumber(it) <= max })
     }
 
-    static Closure<DomainAndErrors> inList(DomainAndErrors domainAndErrors, List<String> fields, List values) {
+    static DomainAndErrors inList(DomainAndErrors domainAndErrors, List<String> fields, List values) {
         return validate(domainAndErrors, 'inList', fields, { it in values })
     }
 
-    static Closure<DomainAndErrors> notInList(DomainAndErrors domainAndErrors, List<String> fields, List values) {
+    static DomainAndErrors notInList(DomainAndErrors domainAndErrors, List<String> fields, List values) {
         return validate(domainAndErrors, 'notInList', fields, { !(it in values) })
     }
 
     /**
      * domainsGroupByLowerCaseKey: key is in lower case, value is a list of items, and items are all the objects, including the current object to validate
      */
-    static Closure<DomainAndErrors> unique(DomainAndErrors domainAndErrors, List<String> fields, Map<String, List> domainsGroupByLowerCaseKey) {
+    static DomainAndErrors unique(DomainAndErrors domainAndErrors, List<String> fields, Map<String, List> domainsGroupByLowerCaseKey) {
         return validate(domainAndErrors, 'unique', fields, {
             String key = (it ?: '').toLowerCase()
             List items = domainsGroupByLowerCaseKey.get(key) ?: []
@@ -54,7 +54,7 @@ class OrmValidate {
         return domainAndErrors.mergeErrors(errorType, invalidFieldAndValue)
     }
 
-    static Map<String, Closure<Closure<DomainAndErrors>>> whenSatisfies(DomainAndErrors domainAndErrors, Closure<Boolean> conditionFn) {
+    static Map<String, Closure<DomainAndErrors>> whenSatisfies(DomainAndErrors domainAndErrors, Closure<Boolean> conditionFn) {
         return [
                 required : { List<String> fields ->
                     return conditionFn(domainAndErrors.domain) ?
