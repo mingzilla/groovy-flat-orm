@@ -1,5 +1,7 @@
 package uk.co.mingzilla.flatorm.util
 
+import groovy.transform.CompileStatic
+
 import java.sql.Connection
 import java.sql.Driver
 
@@ -7,6 +9,7 @@ import java.sql.Driver
  * @since 01/01/2024
  * @author ming.huang
  */
+@CompileStatic
 class ConnectionUtil {
 
     static Connection getConnection(String driverClassName, String url, Properties connectionProperties) {

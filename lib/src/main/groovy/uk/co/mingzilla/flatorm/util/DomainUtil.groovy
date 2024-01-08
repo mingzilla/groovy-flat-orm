@@ -1,9 +1,12 @@
 package uk.co.mingzilla.flatorm.util
 
+import groovy.transform.CompileStatic
+
 /**
  * @since 01/01/2024
  * @author ming.huang
  */
+@CompileStatic
 class DomainUtil {
 
     /**

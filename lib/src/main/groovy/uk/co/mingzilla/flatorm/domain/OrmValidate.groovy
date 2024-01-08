@@ -1,5 +1,6 @@
 package uk.co.mingzilla.flatorm.domain
 
+import groovy.transform.CompileStatic
 import org.apache.commons.lang3.StringUtils
 import uk.co.mingzilla.flatorm.domain.validation.DomainAndErrors
 import uk.co.mingzilla.flatorm.domain.validation.OrmConditionalValidate
@@ -9,6 +10,7 @@ import uk.co.mingzilla.flatorm.util.Fn
  * @since 07/01/2024
  * @author ming.huang
  */
+@CompileStatic
 class OrmValidate {
 
     static DomainAndErrors required(DomainAndErrors domainAndErrors, List<String> fields) {
@@ -20,11 +22,11 @@ class OrmValidate {
     }
 
     static DomainAndErrors minValue(DomainAndErrors domainAndErrors, List<String> fields, Long min) {
-        return validate(domainAndErrors, 'minValue', fields, { Fn.isNumber(it) && Fn.asNumber(it) >= min })
+        return validate(domainAndErrors, 'minValue', fields, { Fn.isNumber(it) && Fn.asLong(it) >= min })
     }
 
     static DomainAndErrors maxValue(DomainAndErrors domainAndErrors, List<String> fields, Long max) {
-        return validate(domainAndErrors, 'maxValue', fields, { Fn.isNumber(it) && Fn.asNumber(it) <= max })
+        return validate(domainAndErrors, 'maxValue', fields, { Fn.isNumber(it) && Fn.asLong(it) <= max })
     }
 
     static DomainAndErrors inList(DomainAndErrors domainAndErrors, List<String> fields, List values) {
@@ -40,7 +42,7 @@ class OrmValidate {
      */
     static DomainAndErrors unique(DomainAndErrors domainAndErrors, List<String> fields, Map<String, List> domainsGroupByLowerCaseKey) {
         return validate(domainAndErrors, 'unique', fields, {
-            String key = (it ?: '').toLowerCase()
+            String key = String.valueOf(it ?: '').toLowerCase()
             List items = domainsGroupByLowerCaseKey.get(key) ?: []
             return items.size() > 1
         })

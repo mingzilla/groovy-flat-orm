@@ -9,6 +9,7 @@ import java.math.RoundingMode
  * @since 01/01/2024
  * @author ming.huang
  */
+//@CompileStatic
 @SuppressWarnings("UnnecessaryQualifiedReference")
 class Fn {
 
@@ -37,7 +38,7 @@ class Fn {
         return Fn.safeGet(false)({ value.class.array }) as boolean
     }
 
-    static String asString = { def obj ->
+    static Closure<String> asString = { def obj ->
         obj == null ? null : String.valueOf(obj)
     }
 
@@ -50,27 +51,27 @@ class Fn {
         }
     }
 
-    static def propAsString = { String name ->
+    static Closure<Closure<String>> propAsString = { String name ->
         { def obj ->
             Fn.asString(Fn.prop(name)(obj ?: [:]))
-        }
+        } as Closure<String>
     }
 
     static Closure<Closure<String>> nestedPropAsString = { List<String> path ->
         { def obj ->
-            Fn.asString(Fn.getIn(path)(obj ?: [:]))
+            Fn.asString(Fn.getIn(path, Fn.toMap(obj) ?: [:])) as String
         }
     }
 
     static def propAsUpperString = { String name ->
         { def obj ->
-            Fn.propAsString(name)(obj)?.toUpperCase()
+            (Fn.propAsString(name)(obj) as String)?.toUpperCase()
         }
     }
 
     static def propAsLowerString = { String name ->
         { def obj ->
-            Fn.propAsString(name)(obj)?.toLowerCase()
+            (Fn.propAsString(name)(obj) as String)?.toLowerCase()
         }
     }
 
@@ -89,7 +90,7 @@ class Fn {
         return text == null ? null : URLDecoder.decode(text, 'UTF-8')
     }
 
-    static def asNumber = { def obj ->
+    static def asNumber(Object obj) {
         String stringVal = "$obj".trim()
         if (stringVal.isInteger()) {
             return Integer.valueOf(stringVal)
@@ -113,7 +114,7 @@ class Fn {
         return stringVal.isInteger() ? Integer.valueOf(stringVal) : null
     }
 
-    static def asLong = { def obj ->
+    static Long asLong(def obj) {
         String stringVal = "$obj".trim()
         return stringVal.isLong() ? Long.valueOf(stringVal) : null
     }
@@ -167,15 +168,15 @@ class Fn {
         }
     }
 
-    static def isBoolean = { def obj ->
+    static boolean isBoolean(Object obj) {
         StringUtils.trimToEmpty(Fn.asString(obj)).toLowerCase() in ['true', 'false']
     }
 
-    static def asBoolean = { def obj ->
+    static boolean asBoolean(Object obj) {
         obj == null ? obj : Fn.asString(obj).trim()?.toLowerCase() == 'true'
     }
 
-    static def propAsBoolean = { String name ->
+    static Closure<Boolean> propAsBoolean(String name) {
         { def obj ->
             return Fn.asBoolean(Fn.propAsString(name)(obj ?: [:]))
         }
@@ -191,7 +192,7 @@ class Fn {
         { def obj ->
             def items = Fn.safeRun({ [] })({ Fn.prop(name)(obj) })
             return items instanceof List ? items : []
-        }
+        } as Closure<List>
     }
 
     static def isPropIn = { String name, List items ->
@@ -200,7 +201,7 @@ class Fn {
             Fn.contains(
                     Fn.propAsString(name)(obj ?: [:])
             )(
-                    Fn.mapList(Fn.asString)(items ?: [])
+                    (items ?: []).collect { Fn.asString(it) }
             )
         }
     }
@@ -211,7 +212,7 @@ class Fn {
             return Fn.contains(
                     Fn.propAsNumberOrLowerCaseString(name)(obj ?: [:])
             )(
-                    Fn.mapList(Fn.asNumberOrLowerCaseString)(items ?: [])
+                    (items ?: []).collect { Fn.asNumberOrLowerCaseString(it) }
             )
         }
     }
@@ -248,11 +249,11 @@ class Fn {
         text?.replaceAll(/([A-Z])/, /_$1/)?.toLowerCase()?.replaceAll(/^_/, '')
     }
 
-    static def spacedToLowerSnakeCase = { String text ->
+    static String spacedToLowerSnakeCase(String text) {
         text?.trim()?.toLowerCase()?.replaceAll(" ", "_")
     }
 
-    static def camelToUpperSnakeCase = { String text ->
+    static String camelToUpperSnakeCase(String text) {
         text?.replaceAll(/([A-Z])/, /_$1/)?.toUpperCase()?.replaceAll(/^_/, '')
     }
 
@@ -334,7 +335,7 @@ class Fn {
     /**
      * @param v - set the type as def so that primitive types are not auto boxed
      * */
-    static def setPrimitiveField = { Object obj, String k, def v ->
+    static Object setPrimitiveField(Object obj, String k, def v) {
         Class type = obj.metaClass.getMetaProperty(k).type
         boolean isNull = Fn.isNull(v) // could be org.codehaus.groovy.grails.web.json.JSONObject$Null
         boolean isNumber = Fn.isNumber(v)
@@ -363,7 +364,7 @@ class Fn {
                     if (isNull || isNumber) obj[(k)] = isNull ? null : Long.valueOf(String.valueOf(v))
                     break
                 case BigDecimal:
-                    if (isNull || isNumber) obj[(k)] = isNull ? null : BigDecimal.valueOf(String.valueOf(v))
+                    if (isNull || isNumber) obj[(k)] = isNull ? null : BigDecimal.valueOf(Fn.asNumber(v) as Long)
                     break
                 case Double:
                     if (isNull || isNumber) obj[(k)] = isNull ? null : Double.valueOf(String.valueOf(v))
@@ -393,7 +394,7 @@ class Fn {
     /**
      * Converts a groovy object into a map.
      * */
-    static def toMap = { Object o, List<String> customExcludeFields = null ->
+    static Map toMap(Object o, List<String> customExcludeFields = null) {
         List<String> excludeFields = (customExcludeFields ?: [])
         List<String> keys = Fn.getKeys(o) - excludeFields
 
@@ -416,7 +417,7 @@ class Fn {
     /**
      * Only include primitive and date fields. Exclude object fields. Refer to {@link Fn#NON_CUSTOM_OBJECT_TYPES}.
      * */
-    static def toFlatMap = { Object o, List<String> customExcludeFields = null ->
+    static Map toFlatMap(Object o, List<String> customExcludeFields = null) {
         Map m = Fn.toMap(o, customExcludeFields)
 
         // exclude custom object (non-primitive) types
@@ -431,7 +432,7 @@ class Fn {
         }
     }
 
-    static Closure<List<String>> getKeys = { Object o ->
+    static List<String> getKeys(Object o) {
         boolean isEnum = o?.class?.enum
         if (isEnum) {
             return Fn.getEnumKeys(o.class)
@@ -444,42 +445,15 @@ class Fn {
     /**
      * enum.properties throws an error in groovy, so use this instead.
      */
-    static Closure<List<String>> getEnumKeys = { Class aClass, List<String> customExcludeFields = null ->
-        List<String> excludes = (customExcludeFields ?: []) + ['class', 'declaringClass']
+    static List<String> getEnumKeys(Class aClass, List<String> customExcludeFields = null) {
+        List<String> excludes = ((customExcludeFields ?: []) as List<String>) + ['class', 'declaringClass']
         return (aClass.metaClass.properties*.name - excludes) as List<String>
     }
 
-
-    static def extractInnerVariables = { String vStartQuote, String vEndQuote ->
-        { String text ->
-            if (!(text && text.contains(vStartQuote) && text.contains(vEndQuote))) return []
-
-            try {
-                String rest = text.substring(text.indexOf(vStartQuote) + vStartQuote.length()) // chop the text and use the rest to avoid endQuote before startQuote
-                int startIndex = 0
-                int endIndex = rest.indexOf(vEndQuote)
-                int nextStartIndex = rest.indexOf(vStartQuote, startIndex)
-
-                while (startIndex >= 0 && (nextStartIndex >= 0 && nextStartIndex < endIndex)) {
-                    rest = rest.substring(nextStartIndex + vStartQuote.length())
-                    endIndex = rest.indexOf(vEndQuote)
-                    nextStartIndex = rest.indexOf(vStartQuote, startIndex)
-                }
-
-                String v = rest.substring(startIndex, endIndex)
-                rest = rest.substring(endIndex + 1)
-
-                return [(vStartQuote + v + vEndQuote)] + Fn.extractInnerVariables(vStartQuote, vEndQuote)(rest)
-            } catch (Exception ignore) {
-                return []
-            }
-        }
-    }
-
-    static def safeGet = { def defaultValue ->
+    static <T> Closure<T> safeGet(def defaultValue) {
         return { Closure fn ->
             try {
-                fn()
+                fn() as T
             } catch (Exception ignore) {
                 return defaultValue
             }
@@ -508,6 +482,18 @@ class Fn {
         }
     }
 
+    static def prop = { String name ->
+        return { Object o ->
+            if (name == null) {
+                null
+            } else if (o instanceof Map) {
+                (o as Map)[(name)]
+            } else {
+                o?.hasProperty(name) ? o[(name)] : null
+            }
+        }
+    }
+
     static <T> Closure<T> pipe(Closure... fns) {
         return { def value ->
             def result = value
@@ -515,6 +501,12 @@ class Fn {
                 result = fn(result)
             }
             return result
+        } as Closure<T>
+    }
+
+    static def contains = { Object item ->
+        return { List list ->
+            list?.contains(item)
         }
     }
 }

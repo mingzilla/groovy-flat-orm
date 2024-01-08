@@ -1,11 +1,13 @@
 package uk.co.mingzilla.flatorm.domain.validation
 
+import groovy.transform.CompileStatic
 import uk.co.mingzilla.flatorm.domain.OrmValidate
 
 /**
  * @since 08/01/2024
  * @author ming.huang
  */
+@CompileStatic
 class OrmConditionalValidate {
 
     Closure<Boolean> conditionFn

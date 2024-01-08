@@ -1,5 +1,6 @@
 package uk.co.mingzilla.flatorm.domain
 
+import groovy.transform.CompileStatic
 import uk.co.mingzilla.flatorm.util.ConnectionUtil
 
 import java.sql.Connection
@@ -11,6 +12,7 @@ import java.sql.Connection
  * @since 01/01/2024
  * @author ming.huang
  */
+@CompileStatic
 class OrmActor {
 
     static void run(Connection connection, Closure fn) {

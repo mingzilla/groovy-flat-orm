@@ -1,11 +1,13 @@
 package uk.co.mingzilla.flatorm.domain.validation
 
+import groovy.transform.CompileStatic
 import uk.co.mingzilla.flatorm.domain.OrmDomain
 
 /**
  * @since 07/01/2024
  * @author ming.huang
  */
+@CompileStatic
 class DomainAndErrors {
 
     OrmDomain domain

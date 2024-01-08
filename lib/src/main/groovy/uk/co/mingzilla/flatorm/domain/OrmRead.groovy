@@ -1,5 +1,6 @@
 package uk.co.mingzilla.flatorm.domain
 
+import groovy.transform.CompileStatic
 import uk.co.mingzilla.flatorm.util.DomainUtil
 import uk.co.mingzilla.flatorm.util.Fn
 
@@ -12,6 +13,7 @@ import java.sql.SQLException
  * @since 01/01/2024
  * @author ming.huang
  */
+@CompileStatic
 class OrmRead {
 
     /**

@@ -1,11 +1,13 @@
 package uk.co.mingzilla.flatorm.domain.validation
 
+import groovy.transform.CompileStatic
 import uk.co.mingzilla.flatorm.util.Fn
 
 /**
  * @since 07/01/2024
  * @author ming.huang
  */
+@CompileStatic
 class DomainErrors {
 
     Map<String, Object> required = [:] // fieldName, invalid value
