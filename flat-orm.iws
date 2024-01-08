@@ -4,11 +4,17 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="9619a9f2-4771-424d-8991-a01efc1d683f" name="Changes" comment="">
+    <list default="true" id="9619a9f2-4771-424d-8991-a01efc1d683f" name="Changes" comment="Added temp changes">
       <change afterPath="$PROJECT_DIR$/lib/src/main/groovy/uk/co/mingzilla/flatorm/domain/validation/OrmConditionalValidate.groovy" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/flat-orm.iws" beforeDir="false" afterPath="$PROJECT_DIR$/flat-orm.iws" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/src/main/groovy/uk/co/mingzilla/example/MyApp.groovy" beforeDir="false" afterPath="$PROJECT_DIR$/lib/src/main/groovy/uk/co/mingzilla/example/MyApp.groovy" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/src/main/groovy/uk/co/mingzilla/example/MyPerson.groovy" beforeDir="false" afterPath="$PROJECT_DIR$/lib/src/main/groovy/uk/co/mingzilla/example/MyPerson.groovy" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/src/main/groovy/uk/co/mingzilla/flatorm/domain/OrmDomain.groovy" beforeDir="false" afterPath="$PROJECT_DIR$/lib/src/main/groovy/uk/co/mingzilla/flatorm/domain/OrmDomain.groovy" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/src/main/groovy/uk/co/mingzilla/flatorm/domain/OrmValidate.groovy" beforeDir="false" afterPath="$PROJECT_DIR$/lib/src/main/groovy/uk/co/mingzilla/flatorm/domain/OrmValidate.groovy" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/src/main/groovy/uk/co/mingzilla/flatorm/domain/validation/DomainErrors.groovy" beforeDir="false" afterPath="$PROJECT_DIR$/lib/src/main/groovy/uk/co/mingzilla/flatorm/domain/validation/DomainErrors.groovy" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/src/test/groovy/uk/co/mingzilla/example/Db1ActorSpec.groovy" beforeDir="false" afterPath="$PROJECT_DIR$/lib/src/test/groovy/uk/co/mingzilla/example/Db1ActorSpec.groovy" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/src/test/groovy/uk/co/mingzilla/example/MyPersonSpec.groovy" beforeDir="false" afterPath="$PROJECT_DIR$/lib/src/test/groovy/uk/co/mingzilla/example/MyPersonSpec.groovy" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -147,7 +153,7 @@
       <recent name="uk.co.mh.flatorm.util" />
     </key>
   </component>
-  <component name="RunManager" selected="Gradle.Db1ActorSpec">
+  <component name="RunManager" selected="Gradle.MyPersonSpec">
     <configuration default="true" type="Applet" factoryName="Applet">
       <module name="" />
       <option name="MAIN_CLASS_NAME" />
@@ -271,7 +277,7 @@
       <RunAsTest>true</RunAsTest>
       <method v="2" />
     </configuration>
-    <configuration name="OrmMappingSpec" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+    <configuration name="MyPersonSpec" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
@@ -284,7 +290,7 @@
           <list>
             <option value=":lib:test" />
             <option value="--tests" />
-            <option value="&quot;uk.co.mh.flatorm.domain.OrmMappingSpec&quot;" />
+            <option value="&quot;uk.co.mingzilla.example.MyPersonSpec&quot;" />
           </list>
         </option>
         <option name="vmOptions" />
@@ -320,11 +326,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Gradle.MyPersonSpec" />
         <item itemvalue="Gradle.Db1ActorSpec" />
         <item itemvalue="Gradle.Db1ActorSpec.Test run" />
         <item itemvalue="Gradle.FnSpec" />
         <item itemvalue="Gradle.FnSpec.isNumber" />
-        <item itemvalue="Gradle.OrmMappingSpec" />
       </list>
     </recent_temporary>
   </component>
@@ -354,7 +360,7 @@
       <workItem from="1704298227609" duration="1242000" />
       <workItem from="1704371346426" duration="905000" />
       <workItem from="1704632756839" duration="14814000" />
-      <workItem from="1704705263419" duration="814000" />
+      <workItem from="1704705263419" duration="4148000" />
     </task>
     <task id="LOCAL-00001" summary="Renamed package">
       <option name="closed" value="true" />
@@ -404,7 +410,23 @@
       <option name="project" value="LOCAL" />
       <updated>1704658176220</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="Added temp changes">
+      <option name="closed" value="true" />
+      <created>1704706084857</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1704706084857</updated>
+    </task>
+    <task id="LOCAL-00008" summary="Added temp changes">
+      <option name="closed" value="true" />
+      <created>1704706118151</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1704706118151</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
