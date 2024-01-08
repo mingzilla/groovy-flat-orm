@@ -13,7 +13,7 @@ class MyApp {
     static void main(String[] args) {
         Db1Actor.run { Connection connection ->
             List<MyPerson> people1 = OrmRead.listAll(connection, MyPerson.class)
-            List<MyPerson> people2 = MyPerson.listWithPrefix(connection, 'Andy')
+            List<MyPerson> people2 = MyPerson.listStartWith(connection, 'Andy')
             MyPerson person = MyPerson.getById(connection, 5)
         }
     }

@@ -2,6 +2,7 @@ package uk.co.mingzilla.flatorm.domain
 
 import org.apache.commons.lang3.StringUtils
 import uk.co.mingzilla.flatorm.domain.validation.DomainAndErrors
+import uk.co.mingzilla.flatorm.domain.validation.OrmConditionalValidate
 import uk.co.mingzilla.flatorm.util.Fn
 
 /**
@@ -11,7 +12,7 @@ import uk.co.mingzilla.flatorm.util.Fn
 class OrmValidate {
 
     static DomainAndErrors required(DomainAndErrors domainAndErrors, List<String> fields) {
-        return validate(domainAndErrors, 'required', fields, { StringUtils.isBlank(String.valueOf(it)) })
+        return validate(domainAndErrors, 'required', fields, { StringUtils.isNotBlank(String.valueOf(it)) })
     }
 
     static DomainAndErrors minLength(DomainAndErrors domainAndErrors, List<String> fields, Long min) {
@@ -41,56 +42,20 @@ class OrmValidate {
         return validate(domainAndErrors, 'unique', fields, {
             String key = (it ?: '').toLowerCase()
             List items = domainsGroupByLowerCaseKey.get(key) ?: []
-            return items.length > 1
+            return items.size() > 1
         })
     }
 
-    static DomainAndErrors validate(DomainAndErrors domainAndErrors, String errorType, List<String> fields, Closure<Boolean> ifTrueThenFailValidationFn) {
+    static DomainAndErrors validate(DomainAndErrors domainAndErrors, String errorType, List<String> fields, Closure<Boolean> isValid) {
         Map<String, Object> fieldAndValue = fields.collectEntries {
             Object fieldValue = domainAndErrors.domain[(it)]
             return [(it): fieldValue]
         }
-        Map<String, Object> invalidFieldAndValue = fieldAndValue.findAll { ifTrueThenFailValidationFn(it.value) }
+        Map<String, Object> invalidFieldAndValue = fieldAndValue.findAll { !isValid(it.value) }
         return domainAndErrors.mergeErrors(errorType, invalidFieldAndValue)
     }
 
-    static Map<String, Closure<DomainAndErrors>> whenSatisfies(DomainAndErrors domainAndErrors, Closure<Boolean> conditionFn) {
-        return [
-                required : { List<String> fields ->
-                    return conditionFn(domainAndErrors.domain) ?
-                            required(domainAndErrors, fields)(domainAndErrors) :
-                            domainAndErrors
-                },
-                minLength: { List<String> fields, Long min ->
-                    return conditionFn(domainAndErrors.domain) ?
-                            minLength(domainAndErrors, fields, min)(domainAndErrors) :
-                            domainAndErrors
-                },
-                minValue : { List<String> fields, Long min ->
-                    return conditionFn(domainAndErrors.domain) ?
-                            minValue(domainAndErrors, fields, min)(domainAndErrors) :
-                            domainAndErrors
-                },
-                maxValue : { List<String> fields, Long max ->
-                    return conditionFn(domainAndErrors.domain) ?
-                            maxValue(domainAndErrors, fields, max)(domainAndErrors) :
-                            domainAndErrors
-                },
-                inList   : { List<String> fields, List values ->
-                    return conditionFn(domainAndErrors.domain) ?
-                            inList(domainAndErrors, fields, values)(domainAndErrors) :
-                            domainAndErrors
-                },
-                notInList: { List<String> fields, List values ->
-                    return conditionFn(domainAndErrors.domain) ?
-                            notInList(domainAndErrors, fields, values)(domainAndErrors) :
-                            domainAndErrors
-                },
-                unique   : { List<String> fields, Map<String, List> domainsGroupByLowerCaseKey ->
-                    return conditionFn(domainAndErrors.domain) ?
-                            unique(domainAndErrors, fields, domainsGroupByLowerCaseKey)(domainAndErrors) :
-                            domainAndErrors
-                },
-        ]
+    static OrmConditionalValidate whenSatisfies(Closure<Boolean> conditionFn) {
+        return new OrmConditionalValidate(conditionFn: conditionFn)
     }
 }

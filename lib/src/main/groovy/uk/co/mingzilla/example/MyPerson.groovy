@@ -18,7 +18,7 @@ class MyPerson implements OrmDomain {
     Integer id
     String name
 
-    static List<MyPerson> listWithPrefix(Connection connection, String prefix) {
+    static List<MyPerson> listStartWith(Connection connection, String prefix) {
         String sql = """
         SELECT * 
         FROM MIS_USERS
@@ -43,12 +43,12 @@ class MyPerson implements OrmDomain {
         ])
     }
 
-    // todo - to finish
+    @Override
     DomainErrors validate() {
-        DomainAndErrors domainAndErrors = DomainAndErrors.create(this)
-        OrmValidate.required(domainAndErrors, ['id', 'name'])
-        OrmValidate.whenSatisfies(domainAndErrors, { id == 1 }).required(['name'])
-        return domainAndErrors.domainErrors;
+        DomainAndErrors item = DomainAndErrors.create(this)
+        OrmValidate.required(item, ['id', 'name'])
+        OrmValidate.whenSatisfies({ id == 1 }).minLength(item, ['name'], 5)
+        return item.domainErrors;
     }
 
     @Override

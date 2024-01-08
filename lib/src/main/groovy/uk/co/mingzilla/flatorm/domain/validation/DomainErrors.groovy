@@ -1,5 +1,7 @@
 package uk.co.mingzilla.flatorm.domain.validation
 
+import uk.co.mingzilla.flatorm.util.Fn
+
 /**
  * @since 07/01/2024
  * @author ming.huang
@@ -19,15 +21,15 @@ class DomainErrors {
     }
 
     boolean hasNoErrors() {
+        return !hasErrors()
+    }
+
+    boolean hasErrors() {
         List<String> fields = Fn.getKeys(this)
         String invalidField = fields.find {
             Map field = this[(it)] as Map
             return !field.isEmpty()
         }
         return invalidField != null
-    }
-
-    boolean hasErrors() {
-        return !hasNoErrors();
     }
 }

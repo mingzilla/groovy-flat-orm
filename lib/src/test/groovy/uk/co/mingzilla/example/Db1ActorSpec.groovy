@@ -21,7 +21,7 @@ class Db1ActorSpec extends Specification {
 
         Db1Actor.run { Connection connection ->
             people1 = OrmRead.listAll(connection, MyPerson.class)
-            people2 = MyPerson.listWithPrefix(connection, 'ADM')
+            people2 = MyPerson.listStartWith(connection, 'ADM')
             person = MyPerson.getById(connection, 1)
         }
 
@@ -39,7 +39,7 @@ class Db1ActorSpec extends Specification {
 
         Db1Actor.runInTx { Connection connection ->
             people1 = OrmRead.listAll(connection, MyPerson.class)
-            people2 = MyPerson.listWithPrefix(connection, 'ADM')
+            people2 = MyPerson.listStartWith(connection, 'ADM')
             person = MyPerson.getById(connection, 1)
         }
 
