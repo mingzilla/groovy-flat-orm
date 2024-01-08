@@ -32,4 +32,15 @@ class DomainErrors {
         }
         return invalidField != null
     }
+
+    Map<String, Map<String, Object>> errors() {
+        List<String> fields = Fn.getKeys(this)
+        List<String> invalidFields = fields.findAll {
+            Map field = this[(it)] as Map
+            return !field.isEmpty()
+        }
+        return invalidFields.collectEntries {
+            [(it): (this[(it)])]
+        }
+    }
 }

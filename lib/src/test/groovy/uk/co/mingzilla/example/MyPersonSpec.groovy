@@ -22,7 +22,9 @@ class MyPersonSpec extends Specification {
         DomainErrors domainErrors = person.validate()
 
         then:
-        domainErrors.hasErrors()
-        domainErrors.minLength == [name: 'Andy']
+        assert domainErrors.hasErrors()
+        assert !domainErrors.hasNoErrors()
+        assert domainErrors.minLength == [name: 'Andy']
+        assert domainErrors.errors() == [minLength: [name: 'Andy']]
     }
 }
