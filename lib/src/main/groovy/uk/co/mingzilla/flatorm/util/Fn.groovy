@@ -182,6 +182,12 @@ class Fn {
         }
     }
 
+    static Object trimToEmptyIfIsString(Object v) {
+        if (!(v instanceof String)) return v
+        if (v == null) return v
+        return StringUtils.trimToEmpty(v)
+    }
+
     static def propAsLong = { String name ->
         { def obj ->
             return Fn.asLong(Fn.propAsString(name)(obj ?: [:]))
@@ -491,6 +497,14 @@ class Fn {
             } else {
                 o?.hasProperty(name) ? o[(name)] : null
             }
+        }
+    }
+
+    static Closure<Map<String, Object>> pick(List<String> fields) {
+        return { def obj ->
+            (fields ?: []).collectEntries { field ->
+                [(field): Fn.prop(field)(obj)]
+            } as Map<String, Object>
         }
     }
 

@@ -7,4 +7,5 @@
 * implement saving
 
 ## Done
+* implement data cleaning - likely to exclude, because data cleaning modifies the value, so it's good only for the UI. Server side often just reject invalid values
 * implement reading objects
