@@ -11,6 +11,7 @@ import uk.co.mingzilla.flatorm.util.Fn
 class DomainErrors {
 
     Map<String, Object> required = [:] // fieldName, invalid value
+
     Map<String, Object> minLength = [:] // fieldName, invalid value
     Map<String, Object> minValue = [:] // fieldName, invalid value
     Map<String, Object> maxValue = [:] // fieldName, invalid value

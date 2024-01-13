@@ -6,8 +6,6 @@ import uk.co.mingzilla.flatorm.domain.OrmRead
 import java.sql.Connection
 
 /**
- * (C) Copyright panintelligence Ltd
- *
  * @since 07/01/2024
  * @author ming.huang
  */

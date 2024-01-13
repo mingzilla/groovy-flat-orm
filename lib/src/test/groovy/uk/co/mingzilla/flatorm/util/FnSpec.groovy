@@ -3,8 +3,6 @@ package uk.co.mingzilla.flatorm.util
 import spock.lang.Specification
 
 /**
- * (C) Copyright panintelligence Ltd
- *
  * @since 07/01/2024
  * @author ming.huang
  */
