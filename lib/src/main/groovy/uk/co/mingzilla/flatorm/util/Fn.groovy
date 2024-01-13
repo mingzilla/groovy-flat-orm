@@ -51,7 +51,7 @@ class Fn {
         }
     }
 
-    static Closure<Closure<String>> propAsString = { String name ->
+    static Closure<String> propAsString(String name) {
         { def obj ->
             Fn.asString(Fn.prop(name)(obj ?: [:]))
         } as Closure<String>
