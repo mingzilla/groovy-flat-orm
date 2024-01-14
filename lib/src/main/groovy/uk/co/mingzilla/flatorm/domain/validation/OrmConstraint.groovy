@@ -22,7 +22,7 @@ class OrmConstraint {
     }
 
     static OrmConstraint minLength(Integer value) {
-        return new OrmConstraint(type: OrmConstraintType.MIN_LENGTH, value: String.valueOf(value))
+        return new OrmConstraint(type: OrmConstraintType.MINIMUM_LENGTH, value: String.valueOf(value))
     }
 
     static OrmConstraint minValue(Integer value) {
@@ -45,7 +45,7 @@ class OrmConstraint {
         switch (constraint.type) {
             case OrmConstraintType.REQUIRED:
                 return StringUtils.isNotBlank(v as String)
-            case OrmConstraintType.MIN_LENGTH:
+            case OrmConstraintType.MINIMUM_LENGTH:
                 return v == null || (String.valueOf(v ?: '').size() >= (constraint.value as Integer))
             case OrmConstraintType.MINIMUM_VALUE:
                 return v == null || (Fn.isNumber(v) && Fn.asLong(v) >= (constraint.value as Integer))

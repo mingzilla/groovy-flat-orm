@@ -25,7 +25,7 @@ class MyPersonSpec extends Specification {
         assert domainErrors.hasErrors()
         assert domainErrors.toMap() == [
                 'name': [
-                        [constraint: 'MIN_LENGTH', constraintValue: '5', field: 'name', invalidValue: 'Andy']
+                        [constraint: 'MINIMUM_LENGTH', constraintValue: '5', field: 'name', invalidValue: 'Andy']
                 ]
         ]
     }

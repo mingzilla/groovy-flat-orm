@@ -7,7 +7,7 @@ package uk.co.mingzilla.flatorm.domain.validation
 enum OrmConstraintType {
 
     REQUIRED('REQUIRED'),
-    MIN_LENGTH('MIN_LENGTH'),
+    MINIMUM_LENGTH('MINIMUM_LENGTH'),
     MINIMUM_VALUE('MINIMUM_VALUE'), // Have error calling it MIN_VALUE, so call it MINIMUM_VALUE
     MAXIMUM_VALUE('MAXIMUM_VALUE'),
     IN_LIST('IN_LIST'),
