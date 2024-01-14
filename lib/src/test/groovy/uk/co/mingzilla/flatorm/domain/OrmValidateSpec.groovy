@@ -3,11 +3,12 @@ package uk.co.mingzilla.flatorm.domain
 import groovy.transform.CompileStatic
 import spock.lang.Specification
 import spock.lang.Unroll
-import uk.co.mingzilla.flatorm.domain.validation.DomainAndErrors
-import uk.co.mingzilla.flatorm.domain.validation.DomainErrors
+import uk.co.mingzilla.flatorm.domain.validation.OrmErrorCollector
+
+import static uk.co.mingzilla.flatorm.domain.validation.OrmConstraint.*
 
 /**
- * @since 13/01/2024
+ * @since 14/01/2024
  * @author ming.huang
  */
 class OrmValidateSpec extends Specification {
@@ -15,32 +16,30 @@ class OrmValidateSpec extends Specification {
     @Unroll
     void "Test required"() {
         given:
-        DomainAndErrors item = DomainAndErrors.create(new Person([(field): (value)]))
+        OrmErrorCollector item = OrmErrorCollector.create(new Person([(field): (value)]))
 
         when:
-        OrmValidate.required(item, ['name'])
+        OrmValidate.with(item, 'name', [required()])
 
         then:
-        DomainErrors domainErrors = item.domainErrors
-        assert domainErrors.hasErrors() != isValid
-        assert domainErrors.hasNoErrors() == isValid
+        assert item.hasErrors() != isValid
 
         where:
         field  | value  | isValid
-        'name' | 'Andy' | true
         'name' | ' '    | false
+        'name' | 'Andy' | true
     }
 
     @Unroll
     void "Test minLength"() {
         given:
-        DomainAndErrors item = DomainAndErrors.create(new Person([(field): (value)]))
+        OrmErrorCollector item = OrmErrorCollector.create(new Person([(field): (value)]))
 
         when:
-        OrmValidate.minLength(item, ['name'], 3)
+        OrmValidate.with(item, 'name', [minLength(3)])
 
         then:
-        assert item.domainErrors.hasNoErrors() == isValid
+        assert item.hasErrors() != isValid
 
         where:
         field  | value  | isValid
@@ -52,14 +51,13 @@ class OrmValidateSpec extends Specification {
     @Unroll
     void "Test minValue, maxValue"() {
         given:
-        DomainAndErrors item = DomainAndErrors.create(new Person([(field): (value)]))
+        OrmErrorCollector item = OrmErrorCollector.create(new Person([(field): (value)]))
 
         when:
-        OrmValidate.minValue(item, ['age'], 18)
-        OrmValidate.maxValue(item, ['age'], 80)
+        OrmValidate.with(item, 'age', [minValue(18), maxValue(80)])
 
         then:
-        assert item.domainErrors.hasNoErrors() == isValid
+        assert item.hasErrors() != isValid
 
         where:
         field | value | isValid
@@ -74,13 +72,13 @@ class OrmValidateSpec extends Specification {
     @Unroll
     void "Test inList - text"() {
         given:
-        DomainAndErrors item = DomainAndErrors.create(new Person([(field): (value)]))
+        OrmErrorCollector item = OrmErrorCollector.create(new Person([(field): (value)]))
 
         when:
-        OrmValidate.inList(item, ['gender'], ['male', 'female'])
+        OrmValidate.with(item, 'gender', [inList(['male', 'female'])])
 
         then:
-        assert item.domainErrors.hasNoErrors() == isValid
+        assert item.hasErrors() != isValid
 
         where:
         field    | value  | isValid
@@ -92,13 +90,13 @@ class OrmValidateSpec extends Specification {
     @Unroll
     void "Test inList - number"() {
         given:
-        DomainAndErrors item = DomainAndErrors.create(new Person([(field): (value)]))
+        OrmErrorCollector item = OrmErrorCollector.create(new Person([(field): (value)]))
 
         when:
-        OrmValidate.inList(item, ['bornMonth'], 1..12)
+        OrmValidate.with(item, 'bornMonth', [inList(1..12)])
 
         then:
-        assert item.domainErrors.hasNoErrors() == isValid
+        assert item.hasErrors() != isValid
 
         where:
         field       | value | isValid
@@ -112,13 +110,13 @@ class OrmValidateSpec extends Specification {
     @Unroll
     void "Test notInList - text"() {
         given:
-        DomainAndErrors item = DomainAndErrors.create(new Person([(field): (value)]))
+        OrmErrorCollector item = OrmErrorCollector.create(new Person([(field): (value)]))
 
         when:
-        OrmValidate.notInList(item, ['gender'], ['male', 'female'])
+        OrmValidate.with(item, 'gender', [notInList(['male', 'female'])])
 
         then:
-        assert item.domainErrors.hasNoErrors() == isValid
+        assert item.hasErrors() != isValid
 
         where:
         field    | value  | isValid
@@ -130,13 +128,13 @@ class OrmValidateSpec extends Specification {
     @Unroll
     void "Test notInList - number"() {
         given:
-        DomainAndErrors item = DomainAndErrors.create(new Person([(field): (value)]))
+        OrmErrorCollector item = OrmErrorCollector.create(new Person([(field): (value)]))
 
         when:
-        OrmValidate.notInList(item, ['bornMonth'], 1..12)
+        OrmValidate.with(item, 'bornMonth', [notInList(1..12)])
 
         then:
-        assert item.domainErrors.hasNoErrors() == isValid
+        assert item.hasErrors() != isValid
 
         where:
         field       | value | isValid
@@ -153,13 +151,13 @@ class OrmValidateSpec extends Specification {
         Person person = new Person()
         person.name = name
         person.age = age
-        DomainAndErrors item = DomainAndErrors.create(person)
+        OrmErrorCollector item = OrmErrorCollector.create(person)
 
         when:
-        OrmValidate.ifHaving('name').required(item, ['age'])
+        OrmValidate.ifHaving('name').then(item, 'age', [required()])
 
         then:
-        assert item.domainErrors.hasNoErrors() == isValid
+        assert item.hasErrors() != isValid
 
         where:
         name   | age  | isValid
@@ -175,13 +173,13 @@ class OrmValidateSpec extends Specification {
         Person person = new Person()
         person.name = name
         person.age = age
-        DomainAndErrors item = DomainAndErrors.create(person)
+        OrmErrorCollector item = OrmErrorCollector.create(person)
 
         when:
-        OrmValidate.ifNotHaving('name').required(item, ['age'])
+        OrmValidate.ifNotHaving('name').then(item, 'age', [required()])
 
         then:
-        assert item.domainErrors.hasNoErrors() == isValid
+        assert item.hasErrors() != isValid
 
         where:
         name   | age  | isValid
@@ -197,13 +195,13 @@ class OrmValidateSpec extends Specification {
         Person person = new Person()
         person.name = name
         person.age = age
-        DomainAndErrors item = DomainAndErrors.create(person)
+        OrmErrorCollector item = OrmErrorCollector.create(person)
 
         when:
-        OrmValidate.ifSatisfies({ age > 35 }).required(item, ['name'])
+        OrmValidate.ifSatisfies({ age > 35 }).then(item, 'name', [required()])
 
         then:
-        assert item.domainErrors.hasNoErrors() == isValid
+        assert item.hasErrors() != isValid
 
         where:
         age  | name   | isValid
@@ -222,13 +220,13 @@ class OrmValidateSpec extends Specification {
         Person person = new Person()
         person.name = name
         person.age = age
-        DomainAndErrors item = DomainAndErrors.create(person)
+        OrmErrorCollector item = OrmErrorCollector.create(person)
 
         when:
-        OrmValidate.ifSatisfies({ age > 35 }).minLength(item, ['name'], 3)
+        OrmValidate.ifSatisfies({ age > 35 }).then(item, 'name', [minLength(3)])
 
         then:
-        assert item.domainErrors.hasNoErrors() == isValid
+        assert item.hasErrors() != isValid
 
         where:
         age  | name   | isValid
@@ -248,14 +246,13 @@ class OrmValidateSpec extends Specification {
         Person person = new Person()
         person.name = name
         person.age = age
-        DomainAndErrors item = DomainAndErrors.create(person)
+        OrmErrorCollector item = OrmErrorCollector.create(person)
 
         when:
-        OrmValidate.ifSatisfies({ name == 'Andy' }).minValue(item, ['age'], 18)
-        OrmValidate.ifSatisfies({ name == 'Andy' }).maxValue(item, ['age'], 80)
+        OrmValidate.ifSatisfies({ name == 'Andy' }).then(item, 'age', [minValue(18), maxValue(80)])
 
         then:
-        assert item.domainErrors.hasNoErrors() == isValid
+        assert item.hasErrors() != isValid
 
         where:
         name   | age  | isValid
@@ -278,13 +275,13 @@ class OrmValidateSpec extends Specification {
         Person person = new Person()
         person.name = name
         person.gender = gender
-        DomainAndErrors item = DomainAndErrors.create(person)
+        OrmErrorCollector item = OrmErrorCollector.create(person)
 
         when:
-        OrmValidate.ifSatisfies({ name == 'Andy' }).inList(item, ['gender'], ['male', 'female'])
+        OrmValidate.ifSatisfies({ name == 'Andy' }).then(item, 'gender', [inList(['male', 'female'])])
 
         then:
-        assert item.domainErrors.hasNoErrors() == isValid
+        assert item.hasErrors() != isValid
 
         where:
         name   | gender | isValid
@@ -303,13 +300,13 @@ class OrmValidateSpec extends Specification {
         Person person = new Person()
         person.name = name
         person.gender = gender
-        DomainAndErrors item = DomainAndErrors.create(person)
+        OrmErrorCollector item = OrmErrorCollector.create(person)
 
         when:
-        OrmValidate.ifSatisfies({ name == 'Andy' }).notInList(item, ['gender'], ['male', 'female'])
+        OrmValidate.ifSatisfies({ name == 'Andy' }).then(item, 'gender', [notInList(['male', 'female'])])
 
         then:
-        assert item.domainErrors.hasNoErrors() == isValid
+        assert item.hasErrors() != isValid
 
         where:
         name   | gender | isValid
@@ -323,7 +320,7 @@ class OrmValidateSpec extends Specification {
     }
 
     @CompileStatic
-    private class Person implements OrmDomain {
+    private static class Person implements OrmDomain {
 
         String name
         Integer age
@@ -336,19 +333,15 @@ class OrmValidateSpec extends Specification {
         }
 
         @Override
-        DomainAndErrors validate() {
+        OrmErrorCollector validate() {
             // Example implementation of a validate function
-            DomainAndErrors item = DomainAndErrors.create(this)
+            OrmErrorCollector item = OrmErrorCollector.create(this)
 
-            OrmValidate.required(item, ['name'])
-            OrmValidate.minLength(item, ['name'], 3)
-            OrmValidate.minValue(item, ['age'], 18)
-            OrmValidate.maxValue(item, ['age'], 80)
+            OrmValidate.with(item, 'name', [required(), minLength(3)])
+            OrmValidate.with(item, 'age', [minValue(18), maxValue(80), notInList(60..64)])
+            OrmValidate.with(item, 'gender', [inList(['male', 'female'])])
+            OrmValidate.ifHaving('name').then(item, 'age', [required()])
 
-            OrmValidate.inList(item, ['gender'], ['male', 'female'])
-            OrmValidate.notInList(item, ['age'], 60..64)
-
-            OrmValidate.ifHaving('name').required(item, ['age'])
             return item
         }
 

@@ -10,40 +10,10 @@ import uk.co.mingzilla.flatorm.domain.OrmValidate
 @CompileStatic
 class OrmConditionalValidate {
 
-    Closure<Boolean> conditionFn
+    Closure<Boolean> conditionIsMetFn
 
-    DomainAndErrors required(DomainAndErrors domainAndErrors, List<String> fields) {
-        if (!conditionFn(domainAndErrors.domain)) return domainAndErrors
-        return OrmValidate.required(domainAndErrors, fields)
-    }
-
-    DomainAndErrors minLength(DomainAndErrors domainAndErrors, List<String> fields, Long min) {
-        if (!conditionFn(domainAndErrors.domain)) return domainAndErrors
-        return OrmValidate.minLength(domainAndErrors, fields, min)
-    }
-
-    DomainAndErrors minValue(DomainAndErrors domainAndErrors, List<String> fields, Long min) {
-        if (!conditionFn(domainAndErrors.domain)) return domainAndErrors
-        return OrmValidate.minValue(domainAndErrors, fields, min)
-    }
-
-    DomainAndErrors maxValue(DomainAndErrors domainAndErrors, List<String> fields, Long max) {
-        if (!conditionFn(domainAndErrors.domain)) return domainAndErrors
-        return OrmValidate.maxValue(domainAndErrors, fields, max)
-    }
-
-    DomainAndErrors inList(DomainAndErrors domainAndErrors, List<String> fields, List values) {
-        if (!conditionFn(domainAndErrors.domain)) return domainAndErrors
-        return OrmValidate.inList(domainAndErrors, fields, values)
-    }
-
-    DomainAndErrors notInList(DomainAndErrors domainAndErrors, List<String> fields, List values) {
-        if (!conditionFn(domainAndErrors.domain)) return domainAndErrors
-        return OrmValidate.notInList(domainAndErrors, fields, values)
-    }
-
-    DomainAndErrors unique(DomainAndErrors domainAndErrors, List<String> fields, Map<String, List> domainsGroupByLowerCaseKey) {
-        if (!conditionFn(domainAndErrors.domain)) return domainAndErrors
-        return OrmValidate.unique(domainAndErrors, fields, domainsGroupByLowerCaseKey)
+    OrmErrorCollector then(OrmErrorCollector collector, String field, List<OrmConstraint> constraints) {
+        if (!conditionIsMetFn(collector.domain)) return collector
+        return OrmValidate.with(collector, field, constraints)
     }
 }

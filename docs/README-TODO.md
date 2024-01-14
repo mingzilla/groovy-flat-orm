@@ -1,7 +1,8 @@
 ## Doing
 * provide constraints and validation
   * the validation returns failures, but there is no way for users to find out the constraints
-  * unit tests 
+  * unit tests
+  * constraints have to use 1 field - multi constraint structure; so rework is needed
 
 ## Todo
 * implement saving

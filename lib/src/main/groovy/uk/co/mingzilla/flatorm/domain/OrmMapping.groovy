@@ -45,7 +45,7 @@ class OrmMapping {
     static <T> T toDomain(List<OrmMapping> dbDomainFieldMappings, ResultSet resultSet, Closure<T> createDomainFn) {
         Map props = dbDomainFieldMappings.collectEntries { OrmMapping mapping ->
             String key = mapping.camelFieldName
-            String value = Fn.<String>safeGet(null)({ resultSet.getObject(mapping.dbFieldName) })
+            String value = Fn.<String> safeGet(null)({ resultSet.getObject(mapping.dbFieldName) })
             [(key): (value)]
         }
 

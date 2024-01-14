@@ -1,7 +1,7 @@
 package uk.co.mingzilla.example
 
 import spock.lang.Specification
-import uk.co.mingzilla.flatorm.domain.validation.DomainErrors
+import uk.co.mingzilla.flatorm.domain.validation.OrmErrorCollector
 
 /**
  * @author ming.huang
@@ -19,12 +19,14 @@ class MyPersonSpec extends Specification {
         MyPerson person = new MyPerson(id: 1, name: 'Andy')
 
         when:
-        DomainErrors domainErrors = person.validate().domainErrors
+        OrmErrorCollector domainErrors = person.validate()
 
         then:
         assert domainErrors.hasErrors()
-        assert !domainErrors.hasNoErrors()
-        assert domainErrors.minLength == [name: 'Andy']
-        assert domainErrors.errors() == [minLength: [name: 'Andy']]
+        assert domainErrors.toMap() == [
+                'name': [
+                        [constraint: 'MIN_LENGTH', constraintValue: '5', field: 'name', invalidValue: 'Andy']
+                ]
+        ]
     }
 }

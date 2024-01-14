@@ -4,9 +4,12 @@ import uk.co.mingzilla.flatorm.domain.OrmDomain
 import uk.co.mingzilla.flatorm.domain.OrmMapping
 import uk.co.mingzilla.flatorm.domain.OrmRead
 import uk.co.mingzilla.flatorm.domain.OrmValidate
-import uk.co.mingzilla.flatorm.domain.validation.DomainAndErrors
+import uk.co.mingzilla.flatorm.domain.validation.OrmErrorCollector
 
 import java.sql.Connection
+
+import static uk.co.mingzilla.flatorm.domain.validation.OrmConstraint.minLength
+import static uk.co.mingzilla.flatorm.domain.validation.OrmConstraint.required
 
 /**
  * @since 01/01/2024
@@ -26,11 +29,12 @@ class MyPerson implements OrmDomain {
     }
 
     @Override
-    DomainAndErrors validate() {
-        DomainAndErrors item = DomainAndErrors.create(this)
-        OrmValidate.required(item, ['id', 'name'])
-        OrmValidate.ifSatisfies({ id == 1 }).minLength(item, ['name'], 5)
-        return item;
+    OrmErrorCollector validate() {
+        OrmErrorCollector item = OrmErrorCollector.create(this)
+        OrmValidate.with(item, 'id', [required()])
+        OrmValidate.with(item, 'name', [required()])
+        OrmValidate.ifSatisfies({ id == 1 }).then(item, 'name', [minLength(5)])
+        return item
     }
 
     @Override

@@ -1,6 +1,7 @@
 package uk.co.mingzilla.flatorm.domain
 
-import uk.co.mingzilla.flatorm.domain.validation.DomainAndErrors
+
+import uk.co.mingzilla.flatorm.domain.validation.OrmErrorCollector
 
 /**
  * @since 02/01/2024
@@ -10,7 +11,7 @@ interface OrmDomain {
 
     List<OrmMapping> resolveMappings()
 
-    DomainAndErrors validate()
+    OrmErrorCollector validate()
 
     String resolveTableName()
 }
