@@ -5,6 +5,7 @@
   * constraints have to use 1 field - multi constraint structure; so rework is needed
 
 ## Todo
+* close result and statement, not the connection
 * implement saving
 
 ## Done
