@@ -2,7 +2,7 @@ package uk.co.mingzilla.flatorm.domain.validation
 
 import groovy.transform.CompileStatic
 import org.apache.commons.lang3.StringUtils
-import uk.co.mingzilla.flatorm.util.Fn
+import uk.co.mingzilla.flatorm.util.InFn
 
 /**
  * Does not include UNIQUE constraint because it can be faster by running a SQL check.
@@ -48,9 +48,9 @@ class OrmConstraint {
             case OrmConstraintType.MINIMUM_LENGTH:
                 return v == null || (String.valueOf(v ?: '').size() >= (constraint.value as Integer))
             case OrmConstraintType.MINIMUM_VALUE:
-                return v == null || (Fn.isNumber(v) && Fn.asLong(v) >= (constraint.value as Integer))
+                return v == null || (InFn.isNumber(v) && InFn.asLong(v) >= (constraint.value as Integer))
             case OrmConstraintType.MAXIMUM_VALUE:
-                return v == null || (Fn.isNumber(v) && Fn.asLong(v) <= (constraint.value as Integer))
+                return v == null || (InFn.isNumber(v) && InFn.asLong(v) <= (constraint.value as Integer))
             case OrmConstraintType.IN_LIST:
                 return v == null || (v in constraint.values)
             case OrmConstraintType.NOT_IN_LIST:

@@ -17,7 +17,7 @@ class DomainUtil {
     static <T> T mergeFields(T obj, Map<String, Object> newProps) {
         Map<String, Object> relevantProps = (newProps ?: [:]).findAll { String k, def v -> obj.hasProperty(k) }
         relevantProps.each { String k, def v ->
-            Fn.setPrimitiveField(obj, k, Fn.trimToEmptyIfIsString(v))
+            InFn.setPrimitiveField(obj, k, InFn.trimToEmptyIfIsString(v))
         }
         return obj
     }

@@ -6,7 +6,7 @@ import uk.co.mingzilla.flatorm.domain.validation.OrmConditionalValidate
 import uk.co.mingzilla.flatorm.domain.validation.OrmConstraint
 import uk.co.mingzilla.flatorm.domain.validation.OrmErrorCollector
 import uk.co.mingzilla.flatorm.domain.validation.OrmFieldError
-import uk.co.mingzilla.flatorm.util.Fn
+import uk.co.mingzilla.flatorm.util.InFn
 
 /**
  * @since 14/01/2024
@@ -33,7 +33,7 @@ class OrmValidate {
 
     static OrmConditionalValidate ifHaving(String field) {
         Closure<Boolean> conditionIsMetFn = { OrmDomain it ->
-            String v = Fn.propAsString(field)(it)
+            String v = InFn.propAsString(field, it)
             return StringUtils.isNotBlank(v)
         }
         return new OrmConditionalValidate(conditionIsMetFn: conditionIsMetFn)
@@ -41,7 +41,7 @@ class OrmValidate {
 
     static OrmConditionalValidate ifNotHaving(String field) {
         Closure<Boolean> conditionIsMetFn = { OrmDomain it ->
-            String v = Fn.propAsString(field)(it)
+            String v = InFn.propAsString(field, it)
             return StringUtils.isBlank(v)
         }
         return new OrmConditionalValidate(conditionIsMetFn: conditionIsMetFn)

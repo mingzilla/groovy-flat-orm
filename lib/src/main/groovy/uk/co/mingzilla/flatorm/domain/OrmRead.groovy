@@ -2,7 +2,7 @@ package uk.co.mingzilla.flatorm.domain
 
 import groovy.transform.CompileStatic
 import uk.co.mingzilla.flatorm.util.DomainUtil
-import uk.co.mingzilla.flatorm.util.Fn
+import uk.co.mingzilla.flatorm.util.InFn
 
 import java.sql.Connection
 import java.sql.PreparedStatement
@@ -136,7 +136,7 @@ class OrmRead {
             resultSet = statement.executeQuery()
 
             while (resultSet.next()) {
-                count = Fn.asLong(resultSet.getObject(1))
+                count = InFn.asLong(resultSet.getObject(1))
             }
         } catch (SQLException e) {
             throw new RuntimeException("Failed running select statement to count records: " + e.message, e)
