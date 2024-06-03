@@ -332,6 +332,17 @@ class InFnSpec extends Specification {
         InFn.propAsInteger("height", obj) == null
     }
 
+    def "test self"() {
+        given:
+        def input = "Hello"
+
+        when:
+        def result = InFn.self(input)
+
+        then:
+        result == input
+    }
+
     @Unroll
     def "test toMap"() {
         given:
