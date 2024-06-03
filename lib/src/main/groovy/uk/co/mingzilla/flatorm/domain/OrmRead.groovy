@@ -18,6 +18,8 @@ import java.sql.SQLException
 @CompileStatic
 class OrmRead {
 
+    static Closure<PreparedStatement> NO_PARAMS = { PreparedStatement it -> it }
+
     /**
      * List objects with a given select statement. Connection is not closed.
      * Always wraps the whole request and response with try/catch/finally close.
@@ -27,7 +29,7 @@ class OrmRead {
         List<OrmMapping> mappings = domain.resolveMappings()
 
         String selectStatement = "SELECT * FROM ${domain.resolveTableName()}"
-        return listAndMerge(connection, mappings, selectStatement, { PreparedStatement it -> it },
+        return listAndMerge(connection, mappings, selectStatement, NO_PARAMS,
                 { Map props ->
                     Object obj = aClass.newInstance()
                     DomainUtil.mergeFields(obj, props) as T
