@@ -1,0 +1,6 @@
+{
+  "driverClassName": "org.mariadb.jdbc.Driver",
+  "url": "jdbc:mariadb://localhost:9910/dashboard",
+  "user": "root",
+  "password": "BfGWi8T0uSVBkc5OZQ3DhhdR"
+}

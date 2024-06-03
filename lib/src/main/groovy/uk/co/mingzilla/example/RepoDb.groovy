@@ -1,5 +1,6 @@
 package uk.co.mingzilla.example
 
+import uk.co.mingzilla.flatorm.domain.conn.ConnectionDetail
 import uk.co.mingzilla.flatorm.util.ConnectionUtil
 
 import java.sql.Connection
@@ -22,11 +23,7 @@ class RepoDb {
     }
 
     private static Connection createTargetDbConnection() {
-        String driverClassName = 'org.mariadb.jdbc.Driver'
-        String url = 'jdbc:mariadb://localhost:9910/dashboard'
-        Properties properties = new Properties()
-        properties.setProperty('user', 'root')
-        properties.setProperty('password', 'BfGWi8T0uSVBkc5OZQ3DhhdR')
-        return ConnectionUtil.getConnection(driverClassName, url, properties)
+        ConnectionDetail detail = ConnectionDetail.createFromPath('mariadb.json')
+        return ConnectionUtil.getConnection(detail.driverClassName, detail.url, detail.connProperties)
     }
 }

@@ -1,6 +1,8 @@
 package uk.co.mingzilla.flatorm.domain
 
 import groovy.transform.CompileStatic
+import uk.co.mingzilla.flatorm.domain.definition.OrmDomain
+import uk.co.mingzilla.flatorm.domain.definition.OrmMapping
 import uk.co.mingzilla.flatorm.util.DomainUtil
 import uk.co.mingzilla.flatorm.util.InFn
 

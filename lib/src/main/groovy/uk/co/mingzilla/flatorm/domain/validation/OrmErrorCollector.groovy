@@ -1,7 +1,7 @@
 package uk.co.mingzilla.flatorm.domain.validation
 
 import groovy.transform.CompileStatic
-import uk.co.mingzilla.flatorm.domain.OrmDomain
+import uk.co.mingzilla.flatorm.domain.definition.OrmDomain
 
 /**
  * @since 14/01/2024

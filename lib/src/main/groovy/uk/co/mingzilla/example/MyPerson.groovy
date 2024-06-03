@@ -1,9 +1,9 @@
 package uk.co.mingzilla.example
 
-import uk.co.mingzilla.flatorm.domain.OrmDomain
-import uk.co.mingzilla.flatorm.domain.OrmMapping
 import uk.co.mingzilla.flatorm.domain.OrmRead
-import uk.co.mingzilla.flatorm.domain.OrmValidate
+import uk.co.mingzilla.flatorm.domain.definition.OrmDomain
+import uk.co.mingzilla.flatorm.domain.definition.OrmMapping
+import uk.co.mingzilla.flatorm.domain.definition.OrmValidate
 import uk.co.mingzilla.flatorm.domain.validation.OrmErrorCollector
 
 import java.sql.Connection

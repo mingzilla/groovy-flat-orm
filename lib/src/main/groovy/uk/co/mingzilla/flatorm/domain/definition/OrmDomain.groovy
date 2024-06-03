@@ -1,4 +1,4 @@
-package uk.co.mingzilla.flatorm.domain
+package uk.co.mingzilla.flatorm.domain.definition
 
 
 import uk.co.mingzilla.flatorm.domain.validation.OrmErrorCollector

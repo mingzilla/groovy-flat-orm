@@ -1,4 +1,4 @@
-package uk.co.mingzilla.flatorm.domain
+package uk.co.mingzilla.flatorm.domain.definition
 
 import groovy.transform.CompileStatic
 import spock.lang.Specification

@@ -1,4 +1,4 @@
-package uk.co.mingzilla.flatorm.domain
+package uk.co.mingzilla.flatorm.domain.definition
 
 import spock.lang.Specification
 import spock.lang.Unroll
