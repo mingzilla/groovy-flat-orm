@@ -23,7 +23,12 @@ class RepoDb {
     }
 
     private static Connection createTargetDbConnection() {
-        ConnectionDetail detail = ConnectionDetail.createFromPath('src/main/groovy/uk/co/mingzilla/example/mariadb.json')
+        ConnectionDetail detail = ConnectionDetail.create([
+                "driverClassName": "org.mariadb.jdbc.Driver",
+                "url"            : "jdbc:mariadb://localhost:3316/storage",
+                "user"           : "root",
+                "password"       : "test1234",
+        ])
         return ConnectionUtil.getConnection(detail.driverClassName, detail.url, detail.connProperties)
     }
 }
