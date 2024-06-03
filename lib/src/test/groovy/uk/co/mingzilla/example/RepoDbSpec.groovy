@@ -1,6 +1,7 @@
 package uk.co.mingzilla.example
 
 import spock.lang.Specification
+import uk.co.mingzilla.flatorm.domain.OrmActor
 import uk.co.mingzilla.flatorm.domain.OrmRead
 
 import java.sql.Connection
@@ -9,7 +10,7 @@ import java.sql.Connection
  * @since 07/01/2024
  * @author ming.huang
  */
-class RepoDbActorSpec extends Specification {
+class RepoDbSpec extends Specification {
 
     void "Test run"() {
         given:
@@ -18,12 +19,12 @@ class RepoDbActorSpec extends Specification {
         MyPerson person
         long count = 0
 
-        RepoDbActor.run { Connection connection ->
+        OrmActor.run(RepoDb.conn, { Connection connection ->
             people1 = OrmRead.listAll(connection, MyPerson.class)
             people2 = MyPerson.listByNameStartsWith(connection, 'ADM') // custom sql
             person = OrmRead.getById(connection, MyPerson.class, 1)
             count = OrmRead.count(connection, MyPerson.class)
-        }
+        })
 
         expect:
         people1.size() > 0
@@ -38,11 +39,11 @@ class RepoDbActorSpec extends Specification {
         List<MyPerson> people2 = []
         MyPerson person
 
-        RepoDbActor.runInTx { Connection connection ->
+        OrmActor.runInTx(RepoDb.conn, { Connection connection ->
             people1 = OrmRead.listAll(connection, MyPerson.class)
             people2 = MyPerson.listByNameStartsWith(connection, 'ADM') // custom sql
             person = OrmRead.getById(connection, MyPerson.class, 1)
-        }
+        })
 
         expect:
         people1.size() > 0

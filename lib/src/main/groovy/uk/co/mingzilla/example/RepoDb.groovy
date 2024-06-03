@@ -6,22 +6,14 @@ import uk.co.mingzilla.flatorm.util.ConnectionUtil
 import java.sql.Connection
 
 /**
- * Wrapper of {@link OrmActor} targeting a specific database.
+ * A specific database.
  *
  * @since 01/01/2024
  * @author ming.huang
  */
-class RepoDbActor {
+class RepoDb {
 
-    static void run(Closure fn) {
-        OrmActor.run(createConnection(), fn)
-    }
-
-    static void runInTx(Closure fn) {
-        OrmActor.runInTx(createConnection(), fn)
-    }
-
-    private static Connection createConnection() {
+    static Connection getConn() {
         try {
             return createTargetDbConnection()
         } catch (Exception ex) {
