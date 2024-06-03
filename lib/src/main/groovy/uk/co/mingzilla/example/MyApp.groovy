@@ -11,7 +11,7 @@ import java.sql.Connection
 class MyApp {
 
     static void main(String[] args) {
-        Db1Actor.run { Connection connection ->
+        RepoDbActor.run { Connection connection ->
             List<MyPerson> people1 = OrmRead.listAll(connection, MyPerson.class)
             List<MyPerson> people2 = MyPerson.listByNameStartsWith(connection, 'Andy')
             MyPerson person = OrmRead.getById(connection, MyPerson.class, 1)

@@ -11,7 +11,7 @@ import java.sql.Connection
  * @since 01/01/2024
  * @author ming.huang
  */
-class Db1Actor {
+class RepoDbActor {
 
     static void run(Closure fn) {
         OrmActor.run(createConnection(), fn)

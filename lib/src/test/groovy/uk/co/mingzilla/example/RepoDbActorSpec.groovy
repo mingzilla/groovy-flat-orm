@@ -9,7 +9,7 @@ import java.sql.Connection
  * @since 07/01/2024
  * @author ming.huang
  */
-class Db1ActorSpec extends Specification {
+class RepoDbActorSpec extends Specification {
 
     void "Test run"() {
         given:
@@ -18,7 +18,7 @@ class Db1ActorSpec extends Specification {
         MyPerson person
         long count = 0
 
-        Db1Actor.run { Connection connection ->
+        RepoDbActor.run { Connection connection ->
             people1 = OrmRead.listAll(connection, MyPerson.class)
             people2 = MyPerson.listByNameStartsWith(connection, 'ADM') // custom sql
             person = OrmRead.getById(connection, MyPerson.class, 1)
@@ -38,7 +38,7 @@ class Db1ActorSpec extends Specification {
         List<MyPerson> people2 = []
         MyPerson person
 
-        Db1Actor.runInTx { Connection connection ->
+        RepoDbActor.runInTx { Connection connection ->
             people1 = OrmRead.listAll(connection, MyPerson.class)
             people2 = MyPerson.listByNameStartsWith(connection, 'ADM') // custom sql
             person = OrmRead.getById(connection, MyPerson.class, 1)
