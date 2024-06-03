@@ -1,6 +1,5 @@
 package uk.co.mingzilla.example
 
-import uk.co.mingzilla.flatorm.domain.OrmActor
 import uk.co.mingzilla.flatorm.util.ConnectionUtil
 
 import java.sql.Connection
