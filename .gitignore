@@ -5,8 +5,3 @@ build-logic
 
 # Ignore Gradle build output directory
 build
-
-# Ignore IntelliJ files
-*.iws
-*.iml
-*.ipr
