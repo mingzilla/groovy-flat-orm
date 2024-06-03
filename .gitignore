@@ -5,7 +5,11 @@ build-logic/
 
 # Ignore Gradle build output directory
 build/
+
+# idea
 idea/
+/.ideaDataSources/
+/dataSources/
 
 # Ignore IntelliJ files
 *.iws

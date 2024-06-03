@@ -21,7 +21,7 @@ class RepoDbSpec extends Specification {
 
         OrmActor.run(RepoDb.conn, { Connection connection ->
             people1 = OrmRead.listAll(connection, MyPerson.class)
-            people2 = MyPerson.listByNameStartsWith(connection, 'ADM') // custom sql
+            people2 = MyPerson.listByNameStartsWith(connection, 'A') // custom sql
             person = OrmRead.getById(connection, MyPerson.class, 1)
             count = OrmRead.count(connection, MyPerson.class)
         })
@@ -41,7 +41,7 @@ class RepoDbSpec extends Specification {
 
         OrmActor.runInTx(RepoDb.conn, { Connection connection ->
             people1 = OrmRead.listAll(connection, MyPerson.class)
-            people2 = MyPerson.listByNameStartsWith(connection, 'ADM') // custom sql
+            people2 = MyPerson.listByNameStartsWith(connection, 'A') // custom sql
             person = OrmRead.getById(connection, MyPerson.class, 1)
         })
 
