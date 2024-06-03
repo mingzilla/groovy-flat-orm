@@ -15,28 +15,33 @@ import java.sql.Connection
 @CompileStatic
 class OrmActor {
 
-    static void run(Connection connection, Closure fn) {
-        if (!connection) return
+    static <T> T run(Connection connection, Closure<T> fn) {
+        if (!connection) return null
+        T result = null
         try {
-            fn(connection)
+            result = fn(connection)
+        } catch (Exception ignore) {
         } finally {
             ConnectionUtil.close(connection)
         }
+        return result
     }
 
     /**
      * Run in a transaction.
      */
-    static void runInTx(Connection connection, Closure fn) {
-        if (!connection) return
+    static <T> T runInTx(Connection connection, Closure<T> fn) {
+        if (!connection) return null
+        T result = null
         try {
             connection.setAutoCommit(false)
-            fn(connection)
+            result = fn(connection)
             connection.commit()
         } catch (Exception ignore) {
             connection.rollback()
         } finally {
             ConnectionUtil.close(connection)
         }
+        return result
     }
 }

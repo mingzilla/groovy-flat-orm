@@ -20,7 +20,7 @@ class Db1ActorSpec extends Specification {
 
         Db1Actor.run { Connection connection ->
             people1 = OrmRead.listAll(connection, MyPerson.class)
-            people2 = MyPerson.listByNameStartWith(connection, 'ADM') // custom sql
+            people2 = MyPerson.listByNameStartsWith(connection, 'ADM') // custom sql
             person = OrmRead.getById(connection, MyPerson.class, 1)
             count = OrmRead.count(connection, MyPerson.class)
         }
@@ -40,7 +40,7 @@ class Db1ActorSpec extends Specification {
 
         Db1Actor.runInTx { Connection connection ->
             people1 = OrmRead.listAll(connection, MyPerson.class)
-            people2 = MyPerson.listByNameStartWith(connection, 'ADM') // custom sql
+            people2 = MyPerson.listByNameStartsWith(connection, 'ADM') // custom sql
             person = OrmRead.getById(connection, MyPerson.class, 1)
         }
 

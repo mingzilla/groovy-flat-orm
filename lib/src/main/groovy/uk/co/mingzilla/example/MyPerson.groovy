@@ -42,7 +42,7 @@ class MyPerson implements OrmDomain {
         return 'MIS_USERS'
     }
 
-    static List<MyPerson> listByNameStartWith(Connection connection, String prefix) {
+    static List<MyPerson> listByNameStartsWith(Connection connection, String prefix) {
         String sql = """
         SELECT * 
         FROM MIS_USERS

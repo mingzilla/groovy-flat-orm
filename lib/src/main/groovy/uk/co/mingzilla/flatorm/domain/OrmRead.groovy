@@ -45,6 +45,7 @@ class OrmRead {
     /**
      * List objects with a given select statement. Connection is not closed.
      * Always wraps the whole request and response with try/catch/finally close.
+     * todo - use params for preparedStatements
      */
     static <T> List<T> listAndMerge(Connection connection, List<OrmMapping> dbDomainFieldMappings, String selectStatement, Closure<T> createDomainFn) {
         List<T> objs = []
