@@ -7,6 +7,7 @@ import uk.co.mingzilla.flatorm.domain.definition.OrmValidate
 import uk.co.mingzilla.flatorm.domain.validation.OrmErrorCollector
 
 import java.sql.Connection
+import java.sql.PreparedStatement
 
 import static uk.co.mingzilla.flatorm.domain.validation.OrmConstraint.minLength
 import static uk.co.mingzilla.flatorm.domain.validation.OrmConstraint.required
@@ -46,8 +47,11 @@ class MyPerson implements OrmDomain {
         String sql = """
         SELECT * 
         FROM MIS_USERS
-        WHERE USERCODE like '${prefix}%'
+        WHERE USERCODE like ?
         """
-        return OrmRead.list(connection, MyPerson.class, sql)
+        return OrmRead.list(connection, MyPerson.class, sql, { PreparedStatement it ->
+            it.setString(1, "${prefix}%")
+            return it
+        })
     }
 }

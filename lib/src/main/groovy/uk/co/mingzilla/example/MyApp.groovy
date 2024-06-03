@@ -14,7 +14,7 @@ class MyApp {
     static void main(String[] args) {
         OrmActor.run(RepoDb.conn, { Connection connection ->
             List<MyPerson> people1 = OrmRead.listAll(connection, MyPerson.class)
-            List<MyPerson> people2 = MyPerson.listByNameStartsWith(connection, 'Andy')
+            List<MyPerson> people2 = MyPerson.listByNameStartsWith(connection, 'An')
             MyPerson person = OrmRead.getById(connection, MyPerson.class, 1)
         })
     }

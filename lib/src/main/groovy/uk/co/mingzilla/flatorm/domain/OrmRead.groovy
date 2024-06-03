@@ -27,17 +27,17 @@ class OrmRead {
         List<OrmMapping> mappings = domain.resolveMappings()
 
         String selectStatement = "SELECT * FROM ${domain.resolveTableName()}"
-        return listAndMerge(connection, mappings, selectStatement,
+        return listAndMerge(connection, mappings, selectStatement, { PreparedStatement it -> it },
                 { Map props ->
                     Object obj = aClass.newInstance()
                     DomainUtil.mergeFields(obj, props) as T
                 })
     }
 
-    static <T> List<T> list(Connection connection, Class aClass, String selectStatement) {
+    static <T> List<T> list(Connection connection, Class aClass, String selectStatement, Closure<PreparedStatement> setParamsFn) {
         List<OrmMapping> mappings = (aClass.newInstance() as OrmDomain).resolveMappings()
 
-        return listAndMerge(connection, mappings, selectStatement,
+        return listAndMerge(connection, mappings, selectStatement, setParamsFn,
                 { Map props ->
                     Object obj = aClass.newInstance()
                     DomainUtil.mergeFields(obj, props) as T
@@ -48,13 +48,14 @@ class OrmRead {
      * List objects with a given select statement. Connection is not closed.
      * Always wraps the whole request and response with try/catch/finally close.
      */
-    static <T> List<T> listAndMerge(Connection connection, List<OrmMapping> dbDomainFieldMappings, String selectStatement, Closure<T> createDomainFn) {
+    static <T> List<T> listAndMerge(Connection connection, List<OrmMapping> dbDomainFieldMappings, String selectStatement, Closure<PreparedStatement> setParamsFn, Closure<T> createDomainFn) {
         List<T> objs = []
         PreparedStatement statement
         ResultSet resultSet
 
         try {
             statement = connection.prepareStatement(selectStatement.toString())
+            statement = setParamsFn(statement)
             resultSet = statement.executeQuery()
 
             while (resultSet.next()) {

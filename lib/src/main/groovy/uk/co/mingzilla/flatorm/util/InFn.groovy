@@ -129,20 +129,24 @@ class InFn {
         return asString(prop(name, obj ?: [:]))
     }
 
-    static def camelToLowerHyphenCase(String text) {
+    static String camelToLowerHyphenCase(String text) {
         text?.replaceAll(/([A-Z])/, /-$1/)?.toLowerCase()?.replaceAll(/^-/, '')
     }
 
-    static def hyphenToSnakeCase(String text) {
+    static String hyphenToSnakeCase(String text) {
         text?.replaceAll(/([-])/, '_')
     }
 
-    static def snakeToHyphenCase(String text) {
+    static String snakeToHyphenCase(String text) {
         text?.replaceAll(/([_])/, '-')
     }
 
-    static def propAsInteger(String name, Object obj) {
+    static Integer propAsInteger(String name, Object obj) {
         return asInteger(propAsString(name, obj))
+    }
+
+    static <T> T self(T x) {
+        return x
     }
 
     static Map toMap(Object o, List<String> customExcludeFields = null) {
