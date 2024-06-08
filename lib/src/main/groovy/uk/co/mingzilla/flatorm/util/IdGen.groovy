@@ -7,6 +7,10 @@ class IdGen {
     private Set<Integer> generatedNumbers = new HashSet<>()
     private Random random = new Random()
 
+    static IdGen create() {
+        return new IdGen()
+    }
+
     Integer getInt() {
         if (generatedNumbers.size() >= LIMIT) {
             throw new IllegalStateException("All unique numbers have been generated")

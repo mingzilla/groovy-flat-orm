@@ -7,10 +7,8 @@ import uk.co.mingzilla.flatorm.domain.validation.OrmErrorCollector
 import uk.co.mingzilla.flatorm.util.IdGen
 import uk.co.mingzilla.flatorm.util.InFn
 
-import java.sql.Connection
-import java.sql.PreparedStatement
-import java.sql.ResultSet
-import java.sql.ResultSetMetaData
+import java.sql.*
+import java.util.Date
 
 @CompileStatic
 class OrmWrite {
@@ -39,24 +37,11 @@ class OrmWrite {
         return domain
     }
 
-    private static Integer resolveId(ResultSet generatedKeys, OrmMapping idMapping) {
-        if (!idMapping) throw new UnsupportedOperationException('Missing OrmMapping for id')
-        ResultSetMetaData metaData = generatedKeys.metaData
-        int columnCount = metaData.columnCount
-        for (int i = 1; i <= columnCount; i++) {
-            String columnName = metaData.getColumnName(i)
-            if (idMapping.dbFieldName.equalsIgnoreCase(columnName)) {
-                return generatedKeys.getInt(i)
-            }
-        }
-        return null
-    }
-
     static PreparedStatement createInsertPreparedStatement(Connection conn, OrmDomain domain) {
         List<List<OrmMapping>> idAndNonIdMappings = OrmMapping.splitIdAndNonIdMappings(domain.resolveMappings())
         List<OrmMapping> nonIdMappings = idAndNonIdMappings[1]
         String insertSql = createInsertStatement(domain.tableName(), nonIdMappings)
-        PreparedStatement insertStmt = conn.prepareStatement(insertSql)
+        PreparedStatement insertStmt = conn.prepareStatement(insertSql, Statement.RETURN_GENERATED_KEYS)
         insertStmt = setStatementParams(insertStmt, domain, nonIdMappings)
         return insertStmt
     }
@@ -137,5 +122,21 @@ class OrmWrite {
         }
 
         return statement
+    }
+
+    private static Integer resolveId(ResultSet generatedKeys, OrmMapping idMapping) {
+        if (!idMapping) throw new UnsupportedOperationException('Missing OrmMapping for id')
+        if (!generatedKeys.next()) return null // call next() to move the ResultSet cursor
+        ResultSetMetaData metaData = generatedKeys.metaData
+        int columnCount = metaData.columnCount
+        for (int i = 1; i <= columnCount; i++) {
+            String columnName = metaData.getColumnName(i)
+            if (idMapping.dbFieldName.equalsIgnoreCase(columnName)) {
+                return generatedKeys.getInt(i)
+            }
+        }
+        // it is possible that a driver is implemented to return 'insert_id' (rather than using the actual column name) as the columnName
+        // If that happens, we fallback to use 1. Typically, the generated key is the first column in the ResultSet
+        return generatedKeys.getInt(1)
     }
 }
