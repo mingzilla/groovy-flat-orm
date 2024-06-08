@@ -18,7 +18,7 @@ class OrmMapping {
     static OrmMapping create(String camelFieldName, String dbFieldName) {
         new OrmMapping(
                 camelFieldName: camelFieldName,
-                dbFieldName: dbFieldName,
+                dbFieldName: dbFieldName.toLowerCase(),
         )
     }
 
@@ -28,7 +28,7 @@ class OrmMapping {
     static List<OrmMapping> mapDomain(Class aClass, List<OrmMapping> customMapping = null) {
         List<OrmMapping> defaults = createDomainDefault(aClass)
         List<OrmMapping> items = (customMapping && !customMapping.empty) ? (customMapping + defaults) : defaults
-        return items.unique { it.camelFieldName }
+        return items.unique { it.camelFieldName }.sort { a, b -> a.dbFieldName <=> b.dbFieldName }
     }
 
     private static List<OrmMapping> createDomainDefault(Class aClass) {
@@ -50,5 +50,16 @@ class OrmMapping {
         }
 
         return createDomainFn(props)
+    }
+
+    static List<List<OrmMapping>> splitIdAndNonIdMappings(List<OrmMapping> mappings) {
+        OrmMapping idMapping = mappings.find { it.camelFieldName?.equalsIgnoreCase('id') }
+        List<OrmMapping> nonIdMappings = mappings.findAll { it.camelFieldName != idMapping?.camelFieldName }
+        return [[idMapping], nonIdMappings]
+    }
+
+    static OrmMapping getIdMapping(List<OrmMapping> mappings) {
+        List<List<OrmMapping>> idAndNonIdMappings = splitIdAndNonIdMappings(mappings)
+        return idAndNonIdMappings[0][0]
     }
 }

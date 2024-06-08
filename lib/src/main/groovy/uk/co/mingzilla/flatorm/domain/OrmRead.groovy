@@ -28,7 +28,7 @@ class OrmRead {
         OrmDomain domain = aClass.newInstance() as OrmDomain
         List<OrmMapping> mappings = domain.resolveMappings()
 
-        String selectStatement = "SELECT * FROM ${domain.resolveTableName()}"
+        String selectStatement = "SELECT * FROM ${domain.tableName()}"
         return listAndMerge(connection, mappings, selectStatement, NO_PARAMS,
                 { Map props ->
                     Object obj = aClass.newInstance()
@@ -79,7 +79,7 @@ class OrmRead {
         List<OrmMapping> mappings = domain.resolveMappings()
 
         String idField = mappings.find { it.camelFieldName == 'id' }?.dbFieldName
-        String selectStatement = "SELECT * FROM ${domain.resolveTableName()} WHERE ${idField} = ${id}"
+        String selectStatement = "SELECT * FROM ${domain.tableName()} WHERE ${idField} = ${id}"
         return getAndMerge(connection, mappings, selectStatement,
                 { Map props ->
                     Object obj = aClass.newInstance()
@@ -124,7 +124,7 @@ class OrmRead {
      */
     static Long count(Connection connection, Class aClass) {
         OrmDomain domain = aClass.newInstance() as OrmDomain
-        String selectStatement = "SELECT count(*) from ${domain.resolveTableName()}".toString()
+        String selectStatement = "SELECT count(*) from ${domain.tableName()}".toString()
         return getCount(connection, selectStatement)
     }
 

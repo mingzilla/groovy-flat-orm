@@ -272,6 +272,42 @@ class InFnSpec extends Specification {
         InFn.getKeys(obj) == ["name", "age"]
     }
 
+    class MyPerson {
+        Integer id
+        int age
+        String name
+        boolean isMale
+        Boolean isSingle
+        long longV
+        Long longV2
+    }
+
+    @Unroll
+    def "test getType returns correct type for existing fields"() {
+        expect:
+        InFn.getType(MyPerson, fieldName) == expectedType
+
+        where:
+        fieldName  | expectedType
+        "id"       | Integer
+        "age"      | int
+        "name"     | String
+        "isMale"   | boolean
+        "isSingle" | Boolean
+        "longV"    | long
+        "longV2"   | Long
+    }
+
+    @Unroll
+    def "test getType returns null for non-existing fields"() {
+        expect:
+        InFn.getType(MyPerson, fieldName) == null
+        InFn.getType(null, fieldName) == null
+
+        where:
+        fieldName << ["nonExistentField", "anotherNonExistentField"]
+    }
+
     @Unroll
     def "test camelToUpperSnakeCase"() {
         expect:

@@ -13,5 +13,9 @@ interface OrmDomain {
 
     OrmErrorCollector validate()
 
-    String resolveTableName()
+    Integer getId()
+
+    void setId(Integer id)
+
+    String tableName()
 }

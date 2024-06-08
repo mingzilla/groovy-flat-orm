@@ -1,5 +1,6 @@
 package uk.co.mingzilla.example
 
+import groovy.transform.CompileStatic
 import uk.co.mingzilla.flatorm.domain.conn.ConnectionDetail
 import uk.co.mingzilla.flatorm.util.ConnectionUtil
 
@@ -11,6 +12,7 @@ import java.sql.Connection
  * @since 01/01/2024
  * @author ming.huang
  */
+@CompileStatic
 class RepoDb {
 
     static Connection getConn() {

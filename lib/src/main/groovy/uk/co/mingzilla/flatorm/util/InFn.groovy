@@ -121,6 +121,14 @@ class InFn {
         }
     }
 
+    static Class getType(Class clazz, String field) {
+        try {
+            return clazz.getDeclaredField(field).type
+        } catch (Exception ignore) {
+            return null
+        }
+    }
+
     static String camelToUpperSnakeCase(String text) {
         text?.replaceAll(/([A-Z])/, /_$1/)?.toUpperCase()?.replaceAll(/^_/, '')
     }
@@ -141,8 +149,28 @@ class InFn {
         text?.replaceAll(/([_])/, '-')
     }
 
+    static Boolean propAsBoolean(String name, Object obj) {
+        return asBoolean(propAsString(name, obj))
+    }
+
+    static BigDecimal propAsBigDecimal(String name, Object obj) {
+        return asBigDecimal(propAsString(name, obj))
+    }
+
+    static Double propAsDouble(String name, Object obj) {
+        return asDouble(propAsString(name, obj))
+    }
+
+    static Float propAsFloat(String name, Object obj) {
+        return asFloat(propAsString(name, obj))
+    }
+
     static Integer propAsInteger(String name, Object obj) {
         return asInteger(propAsString(name, obj))
+    }
+
+    static Long propAsLong(String name, Object obj) {
+        return asLong(propAsString(name, obj))
     }
 
     static <T> T self(T x) {

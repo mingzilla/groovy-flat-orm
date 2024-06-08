@@ -322,6 +322,7 @@ class OrmValidateSpec extends Specification {
     @CompileStatic
     private static class Person implements OrmDomain {
 
+        Integer id
         String name
         Integer age
         String gender
@@ -346,7 +347,7 @@ class OrmValidateSpec extends Specification {
         }
 
         @Override
-        String resolveTableName() {
+        String tableName() {
             return 'PERSON'
         }
     }

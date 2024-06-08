@@ -1,8 +1,10 @@
 package uk.co.mingzilla.flatorm.domain.conn
 
 import groovy.json.JsonSlurper
+import groovy.transform.CompileStatic
 import uk.co.mingzilla.flatorm.util.DomainUtil
 
+@CompileStatic
 class ConnectionDetail {
 
     String driverClassName
