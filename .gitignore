@@ -9,7 +9,6 @@ build/
 # idea
 idea/
 /.ideaDataSources/
-/dataSources/
 
 # Ignore IntelliJ files
 *.iws

@@ -9,7 +9,7 @@ import java.sql.PreparedStatement
 
 class OrmWriteSpec extends Specification {
 
-    class MyPerson implements OrmDomain {
+    private class MyPerson implements OrmDomain {
         boolean booleanField
         Boolean boolean2Field
 
