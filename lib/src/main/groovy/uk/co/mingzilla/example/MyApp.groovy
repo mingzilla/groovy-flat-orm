@@ -18,7 +18,7 @@ class MyApp {
 
     static void main(String[] args) {
         runWithTx()
-//        runWithoutTx()
+        runWithoutTx()
     }
 
     static void runWithTx() {
