@@ -119,4 +119,16 @@ class OrmWriteSpec extends Specification {
         then:
         updateStatement == "update my_table set Name = ?, Age = ? where ID = 1"
     }
+
+    def "Test createDeleteStatement method"() {
+        given:
+        String tableName = "MY_TABLE"
+        OrmMapping idMapping = new OrmMapping(camelFieldName: "id", dbFieldName: "ID")
+
+        when:
+        String updateStatement = OrmWrite.createDeleteStatement(tableName, idMapping)
+
+        then:
+        updateStatement == "delete from my_table where ID = ?"
+    }
 }
