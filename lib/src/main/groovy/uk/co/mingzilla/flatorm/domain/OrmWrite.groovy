@@ -13,7 +13,7 @@ import java.util.Date
 @CompileStatic
 class OrmWrite {
 
-    static OrmErrorCollector save(Connection conn, OrmDomain domain) {
+    static OrmErrorCollector validateAndSave(Connection conn, OrmDomain domain) {
         OrmErrorCollector errorCollector = domain.validate()
         if (!errorCollector.hasErrors()) {
             insertOrUpdate(conn, domain)
@@ -43,7 +43,7 @@ class OrmWrite {
         return domain
     }
 
-    static PreparedStatement createInsertPreparedStatement(Connection conn, OrmDomain domain) {
+    private static PreparedStatement createInsertPreparedStatement(Connection conn, OrmDomain domain) {
         List<List<OrmMapping>> idAndNonIdMappings = OrmMapping.splitIdAndNonIdMappings(domain.resolveMappings())
         List<OrmMapping> nonIdMappings = idAndNonIdMappings[1]
         String sql = createInsertStatement(domain.tableName(), nonIdMappings)
@@ -52,13 +52,13 @@ class OrmWrite {
         return statement
     }
 
-    static String createInsertStatement(String tableName, List<OrmMapping> nonIdMappings) {
+    private static String createInsertStatement(String tableName, List<OrmMapping> nonIdMappings) {
         String fieldNames = nonIdMappings*.dbFieldName.join(', ')
         String valuePlaceholders = nonIdMappings.collect { '?' }.join(', ')
         return """insert into ${tableName.toLowerCase()} (${fieldNames}) values (${valuePlaceholders})"""
     }
 
-    static PreparedStatement createUpdatePreparedStatement(Connection conn, OrmDomain domain) {
+    private static PreparedStatement createUpdatePreparedStatement(Connection conn, OrmDomain domain) {
         List<List<OrmMapping>> idAndNonIdMappings = OrmMapping.splitIdAndNonIdMappings(domain.resolveMappings())
         OrmMapping idMapping = idAndNonIdMappings[0][0]
         List<OrmMapping> nonIdMappings = idAndNonIdMappings[1]
@@ -68,13 +68,13 @@ class OrmWrite {
         return statement
     }
 
-    static String createUpdateStatement(String tableName, Integer id, OrmMapping idMapping, List<OrmMapping> nonIdMappings) {
+    private static String createUpdateStatement(String tableName, Integer id, OrmMapping idMapping, List<OrmMapping> nonIdMappings) {
         if (!idMapping) throw new UnsupportedOperationException('Missing OrmMapping for id')
         String setStatement = nonIdMappings.collect { "${it.dbFieldName} = ?" }.join(', ')
         return """update ${tableName.toLowerCase()} set ${setStatement} where ${idMapping.dbFieldName} = ${String.valueOf(id)}"""
     }
 
-    static PreparedStatement createDeletePreparedStatement(Connection conn, OrmDomain domain) {
+    private static PreparedStatement createDeletePreparedStatement(Connection conn, OrmDomain domain) {
         List<List<OrmMapping>> idAndNonIdMappings = OrmMapping.splitIdAndNonIdMappings(domain.resolveMappings())
         OrmMapping idMapping = idAndNonIdMappings[0][0]
         String sql = createDeleteStatement(domain.tableName(), idMapping)
@@ -83,12 +83,12 @@ class OrmWrite {
         return statement
     }
 
-    static String createDeleteStatement(String tableName, OrmMapping idMapping) {
+    private static String createDeleteStatement(String tableName, OrmMapping idMapping) {
         if (!idMapping) throw new UnsupportedOperationException('Missing OrmMapping for id')
         return """delete from ${tableName.toLowerCase()} where ${idMapping.dbFieldName} = ?"""
     }
 
-    static PreparedStatement setStatementParams(PreparedStatement statement, OrmDomain domain, List<OrmMapping> nonIdMappings) {
+    private static PreparedStatement setStatementParams(PreparedStatement statement, OrmDomain domain, List<OrmMapping> nonIdMappings) {
         nonIdMappings.eachWithIndex { OrmMapping it, Integer index ->
             Integer oneBasedPosition = index + 1
             Class type = InFn.getType(domain.class, it.camelFieldName)

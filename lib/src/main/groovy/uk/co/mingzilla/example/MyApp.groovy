@@ -30,7 +30,7 @@ class MyApp {
             println person?.name
 
             MyPerson p = new MyPerson(id: idGen.int, name: 'Andrew')
-            OrmErrorCollector collector = OrmWrite.save(conn, p) // <-
+            OrmErrorCollector collector = OrmWrite.validateAndSave(conn, p) // <-
 
             println p.id
             println collector.hasErrors() // <-
@@ -47,11 +47,11 @@ class MyApp {
             IdGen idGen = IdGen.create() // <-
 
             println OrmRead.count(conn, MyPerson.class)
-            OrmErrorCollector collector1 = OrmWrite.save(conn, new MyPerson(id: idGen.int, name: 'Bobby')) // <- success
+            OrmErrorCollector collector1 = OrmWrite.validateAndSave(conn, new MyPerson(id: idGen.int, name: 'Bobby')) // <- success
             println OrmRead.count(conn, MyPerson.class)
 
             MyPerson p = new MyPerson(name: 'Christine')
-            OrmErrorCollector collector2 = OrmWrite.save(conn, p) // <- failure
+            OrmErrorCollector collector2 = OrmWrite.validateAndSave(conn, p) // <- failure
             println OrmRead.count(conn, MyPerson.class)
 
             List<OrmErrorCollector> people = [collector1, collector2]
