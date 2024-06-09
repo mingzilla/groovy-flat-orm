@@ -17,30 +17,11 @@ import java.sql.Connection
 class MyApp {
 
     static void main(String[] args) {
-        OrmActor.run(RepoDb.conn, { Connection conn ->
-            println 'run'
-            IdGen idGen = IdGen.create() // <-
-            List<MyPerson> people1 = OrmRead.listAll(conn, MyPerson.class) // <- Example usage
-            List<MyPerson> people2 = MyPerson.listByNameStartsWith(conn, 'An') // <-
-            MyPerson person = OrmRead.getById(conn, MyPerson.class, 1) // <-
+        runWithTx()
+//        runWithoutTx()
+    }
 
-            println OrmRead.count(conn, MyPerson.class) // <-
-            println people1*.name.join(', ')
-            println people2*.name.join(', ')
-            println person?.name
-
-            MyPerson p = new MyPerson(id: idGen.int, name: 'Andrew')
-            OrmErrorCollector collector = OrmWrite.validateAndSave(conn, p) // <-
-
-            println p.id
-            println collector.hasErrors() // <-
-            println OrmRead.count(conn, MyPerson.class)
-
-            boolean isDeleted = OrmWrite.delete(conn, p) // <-
-            println isDeleted
-            println OrmRead.count(conn, MyPerson.class)
-        })
-
+    static void runWithTx() {
         Map errorMap = [:]
         OrmActor.runInTx(RepoDb.conn, { Connection conn ->
             println 'runInTx'
@@ -64,5 +45,31 @@ class MyApp {
 
         // when used in a controller, this can be returned as an API response
         println errorMap // [people:[[id:[[field:id, constraint:REQUIRED, invalidValue:null]]]]]
+    }
+
+    static void runWithoutTx() {
+        OrmActor.run(RepoDb.conn, { Connection conn ->
+            println 'run'
+            IdGen idGen = IdGen.create() // <-
+            List<MyPerson> people1 = OrmRead.listAll(conn, MyPerson.class) // <- Example usage
+            List<MyPerson> people2 = MyPerson.listByNameStartsWith(conn, 'An') // <-
+            MyPerson person = OrmRead.getById(conn, MyPerson.class, 1) // <-
+
+            println OrmRead.count(conn, MyPerson.class) // <-
+            println people1*.name.join(', ')
+            println people2*.name.join(', ')
+            println person?.name
+
+            MyPerson p = new MyPerson(id: idGen.int, name: 'Andrew')
+            OrmErrorCollector collector = OrmWrite.validateAndSave(conn, p) // <-
+
+            println p.id
+            println collector.hasErrors() // <-
+            println OrmRead.count(conn, MyPerson.class)
+
+            boolean isDeleted = OrmWrite.delete(conn, p) // <-
+            println isDeleted
+            println OrmRead.count(conn, MyPerson.class)
+        })
     }
 }
