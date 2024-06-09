@@ -22,10 +22,10 @@ class OrmFieldError {
     }
 
     Map<String, Object> toMap() {
-        Map<String, Object> m = [constraint: constraint.type.value] as Map<String, Object>
+        Map<String, Object> m = [field: (field)] as Map<String, Object>
+        m['constraint'] = constraint.type.value
         if (constraint.value != null) m['constraintValue'] = constraint.value
         if (constraint.values != null && !constraint.values.empty) m['constraintValues'] = constraint.values.join(', ')
-        m['field'] = field
         m['invalidValue'] = invalidValue
         return m
     }

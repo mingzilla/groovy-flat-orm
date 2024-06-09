@@ -57,9 +57,10 @@ class MyApp {
             List<OrmErrorCollector> people = [collector1, collector2]
             boolean haveErrors = OrmErrorCollector.haveErrors([people])
             if (haveErrors) {
-                errorMap = [people: people*.toMap()]
+                errorMap = [people: OrmErrorCollector.toErrorMaps(people)]
                 OrmActor.terminate() // <- trigger rollback, so that Bobby is not saved
             }
         })
+        println errorMap
     }
 }

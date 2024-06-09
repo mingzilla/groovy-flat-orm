@@ -34,6 +34,11 @@ class OrmErrorCollector {
         return itemWithError != null
     }
 
+    static List<Map<String, List<Map>>> toErrorMaps(List<OrmErrorCollector> collectors) {
+        List<OrmErrorCollector> itemWithError = collectors.<OrmErrorCollector> toList().findAll { it?.hasErrors() }
+        return itemWithError*.toMap()
+    }
+
     Map<String, List<Map>> toMap() {
         return fields.collectEntries {
             [(it.key): it.value.errors*.toMap()]
