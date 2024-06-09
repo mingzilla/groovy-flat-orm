@@ -61,6 +61,8 @@ class MyApp {
                 OrmActor.terminate() // <- trigger rollback, so that Bobby is not saved
             }
         })
-        println errorMap
+
+        // when used in a controller, this can be returned as an API response
+        println errorMap // [people:[[id:[[field:id, constraint:REQUIRED, invalidValue:null]]]]]
     }
 }
