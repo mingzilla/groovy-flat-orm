@@ -42,7 +42,7 @@ class MyPerson implements OrmDomain {
 
     @Override
     String tableName() {
-        return 'MIS_USERS'
+        return 'mis_users'
     }
 
     static List<MyPerson> listByNameStartsWith(Connection connection, String prefix) {
