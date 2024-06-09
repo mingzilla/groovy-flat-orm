@@ -26,7 +26,7 @@ class MyPerson implements OrmDomain {
     @Override
     List<OrmMapping> resolveMappings() {
         return OrmMapping.mapDomain(MyPerson.class, [
-                OrmMapping.create('id', 'SERIAL'),
+                OrmMapping.create('id', 'serial'),
                 OrmMapping.create('name', 'usercode'),
         ])
     }
@@ -47,9 +47,9 @@ class MyPerson implements OrmDomain {
 
     static List<MyPerson> listByNameStartsWith(Connection connection, String prefix) {
         String sql = """
-        SELECT * 
-        FROM MIS_USERS
-        WHERE USERCODE like ?
+        select * 
+        from mis_users
+        where usercode like ?
         """
         return OrmRead.list(connection, MyPerson.class, sql, { PreparedStatement it ->
             it.setString(1, "${prefix}%")
