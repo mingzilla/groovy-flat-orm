@@ -17,34 +17,8 @@ import java.sql.Connection
 class MyApp {
 
     static void main(String[] args) {
-        runWithTx()
         runWithoutTx()
-    }
-
-    static void runWithTx() {
-        Map errorMap = [:]
-        OrmActor.runInTx(RepoDb.conn, { Connection conn ->
-            println 'runInTx'
-            IdGen idGen = IdGen.create() // <-
-
-            println OrmRead.count(conn, MyPerson.class)
-            OrmErrorCollector collector1 = OrmWrite.validateAndSave(conn, new MyPerson(id: idGen.int, name: 'Bobby')) // <- success
-            println OrmRead.count(conn, MyPerson.class)
-
-            MyPerson p = new MyPerson(name: 'Christine')
-            OrmErrorCollector collector2 = OrmWrite.validateAndSave(conn, p) // <- failure
-            println OrmRead.count(conn, MyPerson.class)
-
-            List<OrmErrorCollector> people = [collector1, collector2]
-            boolean haveErrors = OrmErrorCollector.haveErrors([people])
-            if (haveErrors) {
-                errorMap = [people: OrmErrorCollector.toErrorMaps(people)]
-                OrmActor.terminate() // <- trigger rollback, so that Bobby is not saved
-            }
-        })
-
-        // when used in a controller, this can be returned as an API response
-        println errorMap // [people:[[id:[[field:id, constraint:REQUIRED, invalidValue:null]]]]]
+        runWithTx()
     }
 
     static void runWithoutTx() {
@@ -71,5 +45,31 @@ class MyApp {
             println isDeleted
             println OrmRead.count(conn, MyPerson.class)
         })
+    }
+
+    static void runWithTx() {
+        Map errorMap = [:]
+        OrmActor.runInTx(RepoDb.conn, { Connection conn ->
+            println 'runInTx'
+            IdGen idGen = IdGen.create() // <-
+
+            println OrmRead.count(conn, MyPerson.class)
+            OrmErrorCollector collector1 = OrmWrite.validateAndSave(conn, new MyPerson(id: idGen.int, name: 'Bobby')) // <- success
+            println OrmRead.count(conn, MyPerson.class)
+
+            MyPerson p = new MyPerson(name: 'Christine')
+            OrmErrorCollector collector2 = OrmWrite.validateAndSave(conn, p) // <- failure
+            println OrmRead.count(conn, MyPerson.class)
+
+            List<OrmErrorCollector> people = [collector1, collector2]
+            boolean haveErrors = OrmErrorCollector.haveErrors([people])
+            if (haveErrors) {
+                errorMap = [people: OrmErrorCollector.toErrorMaps(people)]
+                OrmActor.terminate() // <- trigger rollback, so that Bobby is not saved
+            }
+        })
+
+        // when used in a controller, this can be returned as an API response
+        println errorMap // [people:[[id:[[field:id, constraint:REQUIRED, invalidValue:null]]]]]
     }
 }
