@@ -18,6 +18,7 @@ class MyApp {
 
     static void main(String[] args) {
         OrmActor.run(RepoDb.conn, { Connection conn ->
+            println 'run'
             IdGen idGen = IdGen.create() // <-
             List<MyPerson> people1 = OrmRead.listAll(conn, MyPerson.class) // <- Example usage
             List<MyPerson> people2 = MyPerson.listByNameStartsWith(conn, 'An') // <-
@@ -38,6 +39,27 @@ class MyApp {
             boolean isDeleted = OrmWrite.delete(conn, p) // <-
             println isDeleted
             println OrmRead.count(conn, MyPerson.class)
+        })
+
+        Map errorMap = [:]
+        OrmActor.runInTx(RepoDb.conn, { Connection conn ->
+            println 'runInTx'
+            IdGen idGen = IdGen.create() // <-
+
+            println OrmRead.count(conn, MyPerson.class)
+            OrmErrorCollector collector1 = OrmWrite.save(conn, new MyPerson(id: idGen.int, name: 'Bobby')) // <- success
+            println OrmRead.count(conn, MyPerson.class)
+
+            MyPerson p = new MyPerson(name: 'Christine')
+            OrmErrorCollector collector2 = OrmWrite.save(conn, p) // <- failure
+            println OrmRead.count(conn, MyPerson.class)
+
+            List<OrmErrorCollector> people = [collector1, collector2]
+            boolean haveErrors = OrmErrorCollector.haveErrors([people])
+            if (haveErrors) {
+                errorMap = [people: people*.toMap()]
+                OrmActor.terminate() // <- trigger rollback, so that Bobby is not saved
+            }
         })
     }
 }

@@ -29,6 +29,11 @@ class OrmErrorCollector {
         return fields.find { it.value.hasErrors() } != null
     }
 
+    static boolean haveErrors(List<List<OrmErrorCollector>> collectors) {
+        OrmErrorCollector itemWithError = collectors.flatten().<OrmErrorCollector> toList().find { it?.hasErrors() }
+        return itemWithError != null
+    }
+
     Map<String, List<Map>> toMap() {
         return fields.collectEntries {
             [(it.key): it.value.errors*.toMap()]

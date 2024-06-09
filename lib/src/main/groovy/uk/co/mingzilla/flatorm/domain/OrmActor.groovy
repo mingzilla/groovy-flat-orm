@@ -44,4 +44,8 @@ class OrmActor {
         }
         return result
     }
+
+    static void terminate() {
+        throw new Exception('Terminate transaction and rollback')
+    }
 }
