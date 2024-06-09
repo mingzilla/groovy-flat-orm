@@ -28,7 +28,7 @@ class OrmRead {
         OrmDomain domain = aClass.newInstance() as OrmDomain
         List<OrmMapping> mappings = domain.resolveMappings()
 
-        String selectStatement = "SELECT * FROM ${domain.tableName()}"
+        String selectStatement = "select * from ${domain.tableName()}"
         return listAndMerge(connection, mappings, selectStatement, NO_PARAMS,
                 { Map props ->
                     Object obj = aClass.newInstance()
@@ -124,7 +124,7 @@ class OrmRead {
      */
     static Long count(Connection connection, Class aClass) {
         OrmDomain domain = aClass.newInstance() as OrmDomain
-        String selectStatement = "SELECT count(*) from ${domain.tableName()}".toString()
+        String selectStatement = "select count(*) from ${domain.tableName()}".toString()
         return getCount(connection, selectStatement)
     }
 
