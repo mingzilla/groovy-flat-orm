@@ -248,19 +248,23 @@ class InFnSpec extends Specification {
     }
 
     enum TestEnum {
-        ONE, TWO, THREE
+        ONE('ONE', '1'),
+        TWO('TWO', '2'),
+        THREE('THREE', '3')
 
         String name
+        String value
 
-        TestEnum(String name) {
+        TestEnum(String name, String value) {
             this.name = name
+            this.value = value
         }
     }
 
     @Unroll
     def "test getEnumKeys"() {
         expect:
-        InFn.getEnumKeys(TestEnum) == ["name"]
+        InFn.getEnumKeys(TestEnum).sort() == ["name", "value"]
     }
 
     @Unroll
