@@ -80,8 +80,8 @@ class DomainUtilSpec extends Specification {
         ]
         TestDomain1 hc = new TestDomain1([
                 'int1' : 1,
+                'int2' : 1,
                 'int3' : 1,
-                'int2' : 11,
                 'text1': 'X',
                 'text2': 'X',
         ])
