@@ -53,4 +53,47 @@ class DomainUtilSpec extends Specification {
         [name: "  ", age: null]    | ""           | 25          | true
         [name: "New Name", age: 0] | "New Name"   | 0           | true
     }
+
+    static class TestDomain1 {
+        int int1
+        int int2
+        int int3
+        String text1
+        String text2
+    }
+
+    @Unroll
+    def "Test mergeRequestData"() {
+        given:
+        Map<String, Object> originalValues = [
+                'int1' : 5, // user intentionally sets to 5
+                'int2' : 5, // user intentionally sets to 5
+                'int3' : null, // user intentionally sets to null
+                'text1': null, // user intentionally sets to null
+        ]
+        Map<String, Object> values = [
+                'int1' : 5, // user intentionally sets it to 5, and resolved as 5, use 5
+                'int2' : 6, // user intentionally sets it to 5, but resolved as 6, use 6
+                'int3' : 6, // user intentionally sets it to null, but resolved as 6 based on business logic, if only 6 is allowed, user cannot remove it
+                'text1': null, // user intentionally sets it to null, and resolved as null, use null
+                'text2': null, // user does not have an intention to set it to null, but resolved to null (this is null just because a variable is created without value), should use db value
+        ]
+        TestDomain1 hc = new TestDomain1([
+                'int1' : 1,
+                'int3' : 1,
+                'int2' : 11,
+                'text1': 'X',
+                'text2': 'X',
+        ])
+
+        when:
+        TestDomain1 newHc = DomainUtil.mergeRequestData(hc, values, originalValues)
+
+        then:
+        newHc.int1 == 5
+        newHc.int2 == 6
+        newHc.int3 == 6
+        newHc.text1 == null
+        newHc.text2 == 'X'
+    }
 }

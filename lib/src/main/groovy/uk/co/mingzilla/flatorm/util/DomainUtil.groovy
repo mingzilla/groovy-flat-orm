@@ -21,4 +21,46 @@ class DomainUtil {
         }
         return obj
     }
+
+    /**
+     * Merge data submitted from the client side to the server side, which allows submitting only a single field to update one field using the API, without having to submit every single field.
+     *
+     * Used by Domain.mergeData(), so that setting data is consistently handled.
+     * This develops a consistent procedure, so that devs don't need to always consider if they need to use
+     * <pre>
+     * - e.g.`this.myField = myField` - set the value without fallback
+     * - or`this.myField = myField ?: this.myField` - picks up the db value if value supplied is null
+     * </pre>
+     *
+     * @param resolvedProps - values resolved on the server side
+     * @param unmodifiedClientSubmittedProps - used to find out if user submits a value, if they do not submit null, and server side resolves null, use db value because user has no intent to clear it
+     *
+     * Scenarios:
+     * <pre>
+     * - if user intentionally sets value x, and resolved as x, use x
+     * - if user intentionally sets value x, and resolved as y, use y
+     * - if user intentionally sets value null, and resolved as y, use y
+     * - if user intentionally sets value null, and resolved as null, use null
+     * - if user does not submit field (no intent to change), and resolved as null (because a variable is created to process the logic), use db value
+     *   - mostly occurs when using the API to update without supplying every single field
+     * </pre>
+     */
+    static <T> T mergeRequestData(T obj, Map<String, Object> resolvedProps, Map<String, Object> unmodifiedClientSubmittedProps) {
+        Map<String, Object> newProps = resolvedProps.collectEntries { String k, Object v ->
+            boolean clientSendsKey = unmodifiedClientSubmittedProps.containsKey(k)
+            boolean clientSetsNull = unmodifiedClientSubmittedProps[(k)] == null
+            boolean serverSetsValue = v != null
+
+            boolean hasFieldAndSetToNull = clientSendsKey && clientSetsNull
+            if (serverSetsValue) {
+                return [(k): (v)]
+            } else if (hasFieldAndSetToNull) {
+                [(k): null]
+            } else {
+                Object dbValue = obj[(k)]
+                [(k): (dbValue)]
+            }
+        }
+        return mergeFields(obj, newProps)
+    }
 }
