@@ -15,12 +15,12 @@ class OrmMappingSpec extends Specification {
     def "Test mapDomain"() {
         when:
         List<OrmMapping> items = OrmMapping.mapDomain(MyPerson.class, [
-                OrmMapping.create('id', 'SERIAL'),
+                OrmMapping.create('id', 'serial'),
         ])
 
         then:
         items.camelFieldName.containsAll(['id', 'name'])
-        items.dbFieldName.containsAll(['SERIAL', 'NAME'])
+        items.dbFieldName.containsAll(['serial', 'name'])
     }
 
     @Unroll
@@ -34,17 +34,17 @@ class OrmMappingSpec extends Specification {
 
         where:
         camelFieldName | dbFieldName
-        "name"         | "NAME"
-        "age"          | "AGE"
-        "address"      | "ADDRESS"
+        "name"         | "name"
+        "age"          | "age"
+        "address"      | "address"
     }
 
     def "test mapDomain with default mappings"() {
         given:
         List<OrmMapping> expectedMappings = [
-                OrmMapping.create("name", "NAME"),
-                OrmMapping.create("age", "AGE"),
-                OrmMapping.create("active", "ACTIVE")
+                OrmMapping.create("name", "name"),
+                OrmMapping.create("age", "age"),
+                OrmMapping.create("active", "active")
         ]
 
         when:
@@ -60,9 +60,9 @@ class OrmMappingSpec extends Specification {
         given:
         List<OrmMapping> customMappings = [OrmMapping.create("customField", "CUSTOM_FIELD")]
         List<OrmMapping> expectedMappings = customMappings + [
-                OrmMapping.create("name", "NAME"),
-                OrmMapping.create("age", "AGE"),
-                OrmMapping.create("active", "ACTIVE")
+                OrmMapping.create("name", "name"),
+                OrmMapping.create("age", "age"),
+                OrmMapping.create("active", "active")
         ]
 
         when:
@@ -77,14 +77,14 @@ class OrmMappingSpec extends Specification {
     def "test toDomain method"() {
         given:
         ResultSet resultSet = Mock(ResultSet)
-        resultSet.getObject("NAME") >> "John"
-        resultSet.getObject("AGE") >> 25
-        resultSet.getObject("ACTIVE") >> true
+        resultSet.getObject("name") >> "John"
+        resultSet.getObject("age") >> 25
+        resultSet.getObject("active") >> true
 
         List<OrmMapping> mappings = [
-                OrmMapping.create("name", "NAME"),
-                OrmMapping.create("age", "AGE"),
-                OrmMapping.create("active", "ACTIVE")
+                OrmMapping.create("name", "name"),
+                OrmMapping.create("age", "age"),
+                OrmMapping.create("active", "active")
         ]
 
         when:
