@@ -96,6 +96,21 @@ class OrmMappingSpec extends Specification {
         domain.active
     }
 
+    def "test splitIdAndNonIdMappings"() {
+        List<OrmMapping> mappings = [
+                OrmMapping.create("id", "serial"),
+                OrmMapping.create("age", "age"),
+                OrmMapping.create("active", "active")
+        ]
+
+        when:
+        List<List<OrmMapping>> groups = OrmMapping.splitIdAndNonIdMappings(mappings)
+
+        then:
+        groups[0]*.camelFieldName == ['id']
+        groups[1]*.camelFieldName == ['age', 'active']
+    }
+
     static class TestDomain {
         String name
         Integer age
