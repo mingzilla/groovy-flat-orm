@@ -26,18 +26,12 @@ class OrmRead {
      */
     static <T> List<T> listAll(Connection conn, Class aClass) {
         OrmDomain domain = aClass.newInstance() as OrmDomain
-        List<OrmMapping> mappings = domain.resolveMappings()
-
         String selectStatement = "select * from ${domain.tableName()}"
-        return listAndMerge(conn, mappings, selectStatement, NO_PARAMS,
-                { Map props ->
-                    Object obj = aClass.newInstance()
-                    DomainUtil.mergeFields(obj, props) as T
-                })
+        return list(conn, aClass, selectStatement, NO_PARAMS)
     }
 
     /**
-     * Similar to {@link #listAll}. Intended to be used with a custom WHERE clause.
+     * Intended to be used with a custom WHERE clause if needed.
      */
     static <T> List<T> list(Connection conn, Class aClass, String selectStatement, Closure<PreparedStatement> setParamsFn) {
         List<OrmMapping> mappings = (aClass.newInstance() as OrmDomain).resolveMappings()
