@@ -17,6 +17,7 @@ ORM is simple, so it's really not necessary to be too clever about it.
 
 ## Usage
 * Define an Entity/Repository - `extends AbstractOrmDomain`
+* Create a DB connection - `RepoDb.conn` is an example
 * Execute Read - `OrmActor.run`
 * Execute Create / Update / Delete - `OrmActor.runInTx` to write
 
@@ -98,6 +99,7 @@ Check the `example` package.
 * `MyPersonController` - example usage in REST
 * `Db1Actor` - provides a jndi connection to be used by a request 
 * `MyPerson` - a domain class with mapping defined, check unit tests for custom mapping
+* `RepoDb.conn` - Create a DB connection
 
 ## Commands for this project
 * `./gradlew test`
