@@ -22,6 +22,7 @@ ORM is simple, so it's really not necessary to be too clever about it.
 
 ### Define an Entity/Repository
 * refer to `MyPerson.groovy`. Here's a simple version. It extends from `AbstractOrmDomain` to get methods for free
+* IMPORTANT: To avoid SQL injection, always set params to a `PreparedStatement` like `MyPerson.listByNameStatsWith()`
 
 ```groovy
 class MyPerson extends AbstractOrmDomain {
