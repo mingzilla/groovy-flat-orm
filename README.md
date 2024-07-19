@@ -31,7 +31,8 @@ class MyPerson extends AbstractOrmDomain {
 
     @Override
     List<OrmMapping> resolveMappings() {
-        return OrmMapping.mapDomain(MyPerson.class, [
+        // by default `OrmMapping.mapDomain(MyPerson.class)` maps fields based on convention
+        return OrmMapping.mapDomain(MyPerson.class, [  
                 OrmMapping.create('name', 'usercode'), // custom mapping
         ])
     }
